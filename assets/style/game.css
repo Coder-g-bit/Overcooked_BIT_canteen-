@@ -1,0 +1,229 @@
+body{
+    background-color: wheat;
+}
+
+.game-container {
+    left: 50px;
+    top: 10px;
+    width: 800px;
+    height: 700px;
+    background: #015B28;
+    border-radius: 10px;
+    margin-left: 500px;
+    margin-top: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+
+}
+
+.game-container .canteen-east-box {
+    background-image: url(../elements_img/whole_east_canteen.png);
+    background-size: 98%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 100px;
+    right: 150px;
+    top: 150px;
+    position: absolute;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#enter-east-canteen-door {
+    width: 10px;
+    height: 30px;
+    position: absolute;
+    background-color: wheat;
+    right: 0px;
+    top: 35px;
+}
+
+#enter-east-canteen {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 190px;
+    left: 230px;
+    width: 320px;
+    height: 320px;
+}
+
+.game-container .canteen-north-box {
+    background-image: url(../elements_img/whole_north_canteen.png);
+    background-size: 98%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 70px;
+    position: absolute;
+    left: 200px;
+    top: 350px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#enter-north-canteen-door {
+    width: 10px;
+    height: 30px;
+    position: absolute;
+    background-color: wheat;
+    right: 0px;
+    top: 20px;
+}
+
+#enter-north-canteen {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 190px;
+    left: 230px;
+    width: 320px;
+    height: 320px;
+}
+
+.game-container>.choose-button {
+    background-color: transparent;
+    background-image: url(../elements_img/choice_box_background.png);
+    background-size: 98%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#dormitary {
+    /*new*/
+    width: 100px;
+    height: 60px;
+    background-image: url(../elements_img/whole_dormitary.png);
+    background-size: 98%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.game-container .player {
+    background-color: transparent;
+    background-image: url(../img/player.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 25px;
+    right: 45px;
+    width: 50px;
+    height: 50px;
+    transition: transform 0.2s ease;
+    border-radius: 100%;
+    position: absolute;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* 防止页面滚动 */
+}
+
+#ending-game {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    position: absolute;
+    background-color: #A23A00;
+    left: 600px;
+    top: 400px;
+    box-shadow: 0 0 15px 5px #f1c40f;
+    background-position: center;
+    background-size: 175%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/end_background.png);
+}
+
+#dialog {
+    width: 100px;
+    height: 70px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 18px;
+    position: absolute;
+    background-color: transparent;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/dialog_box.png);
+    /* display: none; */
+    bottom: 250px;
+    right: 20px;
+}
+
+.menu-button {
+    position: absolute;
+    top: 0%;
+    /* 您可以根据需要更改位置 */
+    left: 0%;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #015B28;
+    width: 100px;
+    height: 40px;
+    background-position: center center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #A23A00;
+    font-size: 16px;
+}
+
+.menu-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 3;
+}
+
+.menu-panel button {
+    color: white;
+    padding: 10px 36px;
+    text-decoration: none;
+    display: block;
+    background-color: transparent;
+    background-position: center center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: none;
+    font-size: 19px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.menu-panel button:last-child {
+    margin-bottom: 0;
+}
+
+.menu-panel button:hover {
+    color: #7e7e7e;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}

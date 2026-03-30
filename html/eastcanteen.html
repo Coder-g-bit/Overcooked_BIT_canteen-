@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>East Canteen</title>
+    <link rel="stylesheet" href="..\assets\style\east_canteen.css">
+    <link rel="stylesheet" href="..\assets\style\store.css">
+    <script src="../js/audio.js"></script>
+</head>
+
+<body>
+    <canvas id="inventory"></canvas>
+    <div class="game-box" ,id="east-canteen">
+        <div class="store" id="Shop"></div>
+        <div class="store" id="mini-canteen"></div>
+        <div class="store" id="locked-store"></div>
+
+        <div class="student" id="student1"></div>
+        <div class="student" id="student2"></div>
+        <div class="student" id="student3"></div>
+
+        <div class="door" id="exit_door"></div>
+        <div class="door" id="enter_shop_door"></div>
+        <div class="door" id="enter_mini_game_1_door"></div>
+        <div class="door" id="enter_locked_room_door"></div>
+        <audio src="../assets/MP3/open_door.mp3" id="door-open-sound"></audio>
+        <div class="player" id="Player"></div>
+    </div>
+    <audio src="../assets/MP3/walking.mp3" id="walking-sound"></audio>
+    <audio src="../assets/MP3/squeaking.mp3" id="speaking-sound"></audio>
+    <script src="..\js\inventory.js"></script>
+
+    <div class="dialog-box" id="dialog-box">
+        <div class="dialog-img-box" id="dialog-img"></div>
+        <div class="dialog-text-box" id="dialog-text"></div>
+    </div>
+
+    <div class="choice-box" id="leaveEastCanteen">
+        <p>Are you READY to leave?</p>
+        <button class="choice-button" id="isleave" onclick="Back()">YES</button>
+        <button class="choice-button" id="notleave"
+            onclick="Hide(document.getElementById('leaveEastCanteen'))">NO</button>
+    </div>
+
+    <div class="choice-box" id="enterMiniGameOne">
+        <p>It's time to cook!!!</p>
+        <button class="choice-button" id="isenterMG1" onclick="ToMG1()">YES</button>
+        <button class="choice-button" id="notenterMG1"
+            onclick="Hide(document.getElementById('enterMiniGameOne'))">NO</button>
+    </div>
+    <div class="choice-box" id="enterShop">
+        <p>Shopping Time!!!</p>
+        <button class="choice-button" id="isentershop" onclick="ToStore()">YES</button>
+        <button class="choice-button" id="notentershop" onclick="Hide(document.getElementById('enterShop'))">NO</button>
+    </div>
+    <div class="choice-box" id="enterSecretRoom">
+        <p>Welcome to Secret Room</p>
+        <button class="choice-button" id="isenterSR" onclick="ToSR()">YES</button>
+        <button class="choice-button" id="notenterSR"
+            onclick="Hide(document.getElementById('enterSecretRoom'))">NO</button>
+    </div>
+    <button id="menuButton" class="menu-button" onclick="toggleMenu()" title="menuButton"></button>
+    <div id="menuPanel" class="menu-panel">
+        <button id="saveButton" onclick="save()"></button>
+        <button id="quitButton" onclick="goHome()"></button>
+        <button id="resumeButton" onclick="toggleMenu()"></button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+    <link rel="stylesheet" href="../assets/style/menu.css">
+    <audio src="../assets/MP3/canteen_bgm.mp3" id="canteen_bgm"></audio>
+</body>
+
+</html>
+
+<script>
+    //console.log(CoinManager.getCoin());
+    var dialogBox = document.getElementById('dialog-box');
+    const keys = {};
+    const Player = document.getElementById('Player');
+    const Student = [document.getElementById('student1'), document.getElementById('student2'), document.getElementById('student3')];
+    const DoorItem = [document.getElementById('exit_door'), document.getElementById('enter_shop_door'), document.getElementById('enter_mini_game_1_door'), document.getElementById('enter_locked_room_door')];
+    const ConstSpeed = 1.5;
+    let speed = 1.5;
+    let posX = 450;
+    let posY = 520;
+    let flagSecret = 0;
+
+    if ('posXinEastCanteen' in localStorage) {
+        posX = localStorage.getItem('posXinEastCanteen');
+        posY = localStorage.getItem('posYinEastCanteen');
+        localStorage.removeItem('posXinEastCanteen');
+        localStorage.removeItem('posYinEastCanteen');
+    }
+
+    setTimeout(function(){playAudio('canteen_bgm');},500);
+    volumeDown('canteen_bgm',0.1);
+    setInterval(function(){playAudio('canteen_bgm');},60000);
+
+    document.addEventListener('keydown', (e) => {
+        switch (e.key) {
+            case 'e':
+                Enter();
+                break;
+            case ' ':
+                ShowDialog();
+                break;
+        }
+    });
+
+    function EnterThrough(Door) {
+        Door.style.display = 'block';
+        speed = 0;
+    }
+
+    function ToMG1() {
+        window.location.href = 'mini_game_1.html';
+        DoorItem[2].style.boxShadow = 'none';
+    }
+
+    function ToStore() {
+        window.location.href = 'store.html';
+        DoorItem[1].style.boxShadow = 'none';
+    }
+
+    function ToSR() {
+        window.location.href = 'secret_room.html';
+        DoorItem[3].style.boxShadow = 'none';
+    }
+
+    function Back() {
+        window.location.href = 'game.html';
+        DoorItem[0].style.boxShadow = 'none';
+    }
+
+    function Enter() {
+        playAudio("door-open-sound");
+        if (posX > 400 && posX < 520 && posY < 185) EnterThrough(document.getElementById('enterMiniGameOne'));
+        else if (posY > 490 && posX > 380 && posX < 525) EnterThrough(document.getElementById('leaveEastCanteen'));
+        else if (posX > 200 && posX < 300 && posY < 185) EnterThrough(document.getElementById('enterShop'));
+        else if (posX > 730 && posX < 850 && posY < 185) {
+            if ('flagSecret' in localStorage) EnterThrough(document.getElementById('enterSecretRoom'));
+            else alert('Locked!');
+        }
+        else return;
+        localStorage.setItem('posXinEastCanteen', posX);
+        localStorage.setItem('posYinEastCanteen', posY);
+    }
+
+    function Hide(Dialog) {
+        Dialog.style.display = 'none';
+        speed = ConstSpeed;
+    }
+
+    const dialogImg = document.getElementById('dialog-img');
+    const dialogText = document.getElementById('dialog-text');
+
+    function ShowDialog() {
+        playAudio("speaking-sound");
+        speed = 0;
+        dialogBox.style.display = 'block';
+        if (Math.abs(posX - 300) + Math.abs(posY - 400) < 100) {
+            localStorage.setItem('vis1','1');
+            dialogImg.style.backgroundImage = "url(../assets/elements_img/npc_1.png)";
+            dialogText.innerText = "至此胃难之际，鼠们需要一位救世鼠！";
+            Student[0].style.boxShadow = 'none';
+        }
+        else if (Math.abs(posX - 30) + Math.abs(posY - 200) < 100) {
+            localStorage.setItem('vis2','1');
+            dialogImg.style.backgroundImage = "url(../assets/elements_img/npc_3.png)";
+            dialogText.innerHTML = "好想去商店买吃的···只要能到达那个地方<div class=\"secret-choice-box\" id=\"secret-choice\">是否把“鼠片”给它？\n<div class=\"submit-box\" id=\"submit\" onclick=\"CheckItem()\">YES</div><div class=\"cancel-box\" id=\"cancel\" onclick=\"CancelChoice()\">NO</div></div>";
+            Student[2].style.boxShadow = 'none';
+            if (ObjectManager.getObject()[2].num > 0) document.getElementById('submit').style.display = 'block';
+            return;
+        }
+        else if (Math.abs(posX - 700) + Math.abs(posY - 250) < 100) {
+            localStorage.setItem('vis3','1');
+            dialogImg.style.backgroundImage = "url(../assets/elements_img/npc_2.png)";
+            dialogText.innerText = "能量已低至临界状态———\n正在重启———亻尔女子———";
+            Student[1].style.boxShadow = 'none';
+        }
+        else {
+            dialogText.innerText = '这里可没什么鼠鼠想和你交流 :( 快去烹饪吧';
+            dialogImg.style.backgroundImage = "url(../assets/elements_img/locked.png)";
+        }
+        setTimeout(CancelChoice, 3000);
+    }
+
+    function CheckItem() {
+        if (ObjectManager.getObject()[2].num > 0) {
+            ObjectManager.AddObject(2, -1);
+            alert('A secret room is openning');
+            flagSecret = 1;
+            localStorage.setItem('flagSecret', 1);
+        }
+        CancelChoice();
+    }
+
+    function CancelChoice() {
+        dialogBox.style.display = 'none';
+        speed = ConstSpeed;
+    }
+
+    window.addEventListener('keydown', (e) => {
+        keys[e.key] = true;
+    });
+
+    window.addEventListener('keyup', (e) => {
+        keys[e.key] = false;
+    });
+
+    function GameLoop() {
+        if ((keys['w'] || keys['a'] || keys['s'] || keys['d']) && speed) {
+            playAudio("walking-sound");
+        }
+        if (keys['w'] && keys['a']) {
+            posY -= speed;
+            posX -= speed;
+            Player.style.transform = 'rotate(-45deg)';
+        } else if (keys['w'] && keys['d']) {
+            posY -= speed;
+            posX += speed;
+            Player.style.transform = 'rotate(45deg)';
+        } else if (keys['s'] && keys['a']) {
+            posY += speed;
+            posX -= speed;
+            Player.style.transform = 'rotate(-135deg)';
+        } else if (keys['s'] && keys['d']) {
+            posY += speed;
+            posX += speed;
+            Player.style.transform = 'rotate(135deg)';
+        } else if (keys['w']) {
+            posY -= speed;
+            Player.style.transform = 'rotate(0deg)';
+        } else if (keys['a']) {
+            posX -= speed;
+            Player.style.transform = 'rotate(-90deg)';
+        } else if (keys['s']) {
+            posY += speed;
+            Player.style.transform = 'rotate(180deg)';
+        } else if (keys['d']) {
+            posX += speed;
+            Player.style.transform = 'rotate(90deg)';
+        } else {
+            Player.style.transform = 'rotate(0deg)';
+        }
+        posX = Math.max(0, Math.min(950, posX));
+        posY = Math.max(160, Math.min(550, posY));
+        Player.style.left = posX + 'px';
+        Player.style.top = posY + 'px';
+        //console.log(posX, posY);
+        requestAnimationFrame(GameLoop);
+    }
+
+    GameLoop();
+
+    function toggleMenu() {
+        var menuPanel = document.getElementById('menuPanel');
+        var overlay = document.getElementById('overlay');
+        menuPanel.style.display = (menuPanel.style.display === 'block' ? 'none' : 'block');
+        overlay.style.display = (overlay.style.display === 'block' ? 'none' : 'block');
+        speed = (speed == 0 ? 3 : 0);
+    }
+
+    function save() {
+        // 获取当前时间
+        var now = new Date();
+        var timestamp = now.getFullYear() + '-' +
+            (now.getMonth() + 1).toString().padStart(2, '0') + '-' +
+            now.getDate().toString().padStart(2, '0') + ' ' +
+            now.getHours().toString().padStart(2, '0') + ':' +
+            now.getMinutes().toString().padStart(2, '0') + ':' +
+            now.getSeconds().toString().padStart(2, '0');
+
+        // 保存当前时间戳到localStorage
+        localStorage.setItem('currentSaveTime', timestamp);
+        var tempurl
+        tempurl = window.location.href
+        localStorage.setItem('tempurl', tempurl)
+        window.location.href = "../html/load.html"
+        // 跳转到选择存档页面
+        window.location.href = "../html/load.html";
+    }
+
+    function goHome() {
+        window.location.href = "../html/startgame.html";
+    }
+</script>

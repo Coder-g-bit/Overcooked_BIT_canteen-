@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game-The Legend Cook in BIT</title>
+    <link rel="stylesheet" href="../assets/style/mini_game_1.css">
+    <link rel="stylesheet" href="../assets/style/menu.css">
+    <link rel="stylesheet" href="../assets/style/store.css">
+    <script src="../js/save.js"></script>
+    <script src="../js/achievement.js"></script>
+</head>
+
+<body>
+    <div class="game-box" id="game-box">
+        <div class="working-box" id="working-box-horizontal">
+            <div class="prepare-box" id="prepare-box">
+                <div class="assemble-zone" id="zone-1" ondragover="AllowDrop(event)" ondrop="AssembleFood(event, 0)"
+                    onclick="FinishFood(0)" draggable="false">
+                    <div class="burger-layer" id="layer-0"></div>
+                    <div class="stuff-layer" id="layer-1"></div>
+                    <div class="meat-layer" id="layer-2"></div>
+                    <div class="bottle-layer" id="layer-3"></div>
+                    <div class="burger-layer" id="layer-4"></div>
+                </div>
+                <div class="assemble-zone" id="zone-2" ondragover="AllowDrop(event)" ondrop="AssembleFood(event, 1)"
+                    onclick="FinishFood(1)" draggable="false">
+                    <div class="burger-layer" id="layer--0"></div>
+                    <div class="stuff-layer" id="layer--1"></div>
+                    <div class="meat-layer" id="layer--2"></div>
+                    <div class="bottle-layer" id="layer--3"></div>
+                    <div class="burger-layer" id="layer--4"></div>
+                </div>
+            </div>
+            <div class='bottle' id="ketchup-bottle" draggable="true"></div>
+            <div class='bottle' id="salad-bottle" draggable="true"></div>
+            <div class="beverage-machine">
+                <div class="drink-valve" id="cola-valve" onclick="FullfillGlass('Cola_')"></div>
+                <div class="glass" id="Cola_" draggable="false"></div>
+                <div class="drink-valve" id="ice-tea-valve" onclick="FullfillGlass('Ice_tea_')"></div>
+                <div class="glass" id="Ice_tea_" draggable="false"></div>
+            </div>
+            <div id="horizontal-line"></div>
+            <div class='cooker' id="chips-frying-pot">
+                <div class="frying-chips" id="frying-chips-1" draggable="false"></div>
+                <div class="frying-chips" id="frying-chips-2" draggable="false"></div>
+                <div class="frying-chips" id="frying-chips-3" draggable="false"></div>
+            </div>
+            <div id="frying-chips-button" onclick="StartClock()"></div>
+            <div class="clock-set" id="chips-frying-clock">
+                <div class="second-block" id="chips-frying-1s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-2s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-3s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-4s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-5s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-6s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-7s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-8s" style="display: none;"></div>
+                <div class="second-block" id="chips-frying-9s" style="display: none;"></div>
+            </div>
+            <div class='cooker' id="meat-frying-pan">
+                <div class="frying-meat" id="meat-0" draggable="false"></div>
+                <div class="frying-meat" id="meat-1" draggable="false"></div>
+                <div class="frying-meat" id="meat-2" draggable="false"></div>
+                <div class="frying-meat" id="meat-3" draggable="false"></div>
+                <div class="frying-meat" id="meat-4" draggable="false"></div>
+                <div class="meat-clock" id="clock-0">
+                    <div class="clock-dial"></div>
+                    <div class="clock-point" id="point-0"></div>
+                    <div class="clock-center"></div>
+                </div>
+                <div class="meat-clock" id="clock-1">
+                    <div class="clock-dial"></div>
+                    <div class="clock-point" id="point-1"></div>
+                    <div class="clock-center"></div>
+                </div>
+                <div class="meat-clock" id="clock-2">
+                    <div class="clock-dial"></div>
+                    <div class="clock-point" id="point-2"></div>
+                    <div class="clock-center"></div>
+                </div>
+                <div class="meat-clock" id="clock-3">
+                    <div class="clock-dial"></div>
+                    <div class="clock-point" id="point-3"></div>
+                    <div class="clock-center"></div>
+                </div>
+                <div class="meat-clock" id="clock-4">
+                    <div class="clock-dial"></div>
+                    <div class="clock-point" id="point-4"></div>
+                    <div class="clock-center"></div>
+                </div>
+            </div>
+        </div>
+        <div class="working-box" id="working-box-vertical">
+            <div class="unprocessed-stuff" id="unfried-chips" onclick="UnlockChips()"></div>
+            <div class="unprocessed-stuff" id="raw-meat" onclick="AddRawMeat()"></div>
+            <div id="vertical-line"></div>
+            <div class="food-box" id="burger-box">
+                <div class="unprocessed-stuff" id="burger" draggable="true"></div>
+            </div>
+            <div class="food-box" id="cheese-box">
+                <div class="unprocessed-stuff" id="cheese" draggable="true"></div>
+            </div>
+            <div class="food-box" id="cabbage-box">
+                <div class="unprocessed-stuff" id="cabbage" draggable="true"></div>
+            </div>
+        </div>
+        <div class="working-box" id="working-box-lateral"></div>
+        <div class="trash-bin" ondragover="AllowDrop(event)" ondrop="Throw(event)" id="trash-bin"></div>
+        <div class="clock">
+            <div class="clock-time" id="game-clock-time">03:00</div>
+        </div>
+        <div class="orders-list">
+            <div class="order" id="order-0"></div>
+            <div class="order" id="order-1"></div>
+            <div class="order" id="order-2"></div>
+            <div class="order" id="order-3"></div>
+        </div>
+    </div>
+    <!-- <div class="money-box" id="earn-money">Earn Money:0 Mice-crisp</div> -->
+    <div class="coin-display-box" id="coin-display">Earn 0</div>
+    <!-- <div class="coin-display-box" id="coin-display"></div> -->
+    <canvas id="inventory"></canvas>
+    <script src="../js/inventory.js"></script>
+    <div class="Tips" id="Tips">
+        <h3>
+            0.Click the icon of 'Chips' or 'Patty' to fry them<br>
+            1.Press respective button to fry Chips or get drinks<br>
+            2.Drag some of the ingredients to the prepare zone and click it to make a Burger<br>
+            3.Custmors are GODS , they won't wait for you ,HURRY UP!!!
+        </h3>
+    </div>
+    <div class="end-game-box" id="end-game-box">
+        <div id="success-order" class="end-data"></div>
+        <div id="fail-order" class="end-data"></div>
+        <div id="earn-money-final" class="end-data"></div>
+        <div class="back-button" onclick="EndGame()"></div>
+    </div>
+    <button id="menuButton" class="menu-button" onclick="toggleMenu()" title="menuButton"></button>
+    <div id="menuPanel" class="menu-panel">
+        <button id="saveButton" onclick="save()"></button>
+        <button id="quitButton" onclick="goHome()"></button>
+        <button id="resumeButton" onclick="toggleMenu()"></button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+    <script src="../js/audio.js"></script>
+    <audio src="../assets/MP3/click_button.mp3" id="click_button"></audio>
+    <audio src="../assets/MP3/order_fail.mp3" id="order_fail"></audio>
+    <audio src="../assets/MP3/order_success.mp3" id="order_success"></audio>
+    <audio src="../assets/MP3/fry_meat.mp3" id="fry_meat"></audio>
+    <audio src="../assets/MP3/get_drink.mp3" id="get_drink"></audio>
+    <audio src="../assets/MP3/chip_fried.mp3" id="chip_fried"></audio>
+    <audio src="../assets/MP3/squeeze_bottle.mp3" id="squeeze_bottle"></audio>
+    <audio src="../assets/MP3/end_game.mp3" id="end_game"></audio>
+    <audio src="../assets/MP3/minigame_bgm.mp3" id="minigame_bgm"></audio>
+</body>
+
+</html>
+<script>
+    const CostOfUnlockChips = 10;
+    const MaxNumberOfOrders = 4;
+    const MaxTypesOfMealsPerOrder = 3;
+    const TotalTypysOfMeals = 9;
+    const EarnMoneyDisplay = document.getElementById('coin-display');
+
+    let ChipsBagIsLocked = true;
+    let ChipsIsFried = false;
+    let NumberOfFryingChips = 0;
+    let NumberOfActiveOrders = 0;
+    let SecondsBlockNum = 0;
+    let SuccessOrderNum = 0;
+    let FailOrderNum = 0;
+    let EarnMoney = 0;
+    let BestScore = 0;//需要全局存储，可以做相关成就
+
+    let NumberOfActiveMeals = [0, 0, 0, 0];
+    let PosOfChips = [0, 0, 0, 0];
+    let PosOfMeat = [0, 0, 0, 0, 0];
+    let ClockTime = [0, 0, 0, 0, 0];
+    let StopMeatClock = [0, 0, 0, 0, 0];
+
+    let FryingChipsButton = document.getElementById('frying-chips-button');
+    let TrashBin = document.getElementById('trash-bin');
+    let TotalMoneyDisplay = document.getElementById('total-money');
+    let ChipsItem = [0, document.getElementById('frying-chips-1'), document.getElementById('frying-chips-2'), document.getElementById('frying-chips-3'),];
+    let MeatItem = [document.getElementById('meat-0'), document.getElementById('meat-1'), document.getElementById('meat-2'), document.getElementById('meat-3'), document.getElementById('meat-4')];
+    let ClockItem = [document.getElementById('clock-0'), document.getElementById('clock-1'), document.getElementById('clock-2'), document.getElementById('clock-3'), document.getElementById('clock-4')];
+    let AllMeals = ["Chips_", "Cola_", "Ice_tea_", "burg_meat_ketc_burg_", "burg_meat_sala_burg_", "burg_cabb_meat_ketc_burg_", "burg_cabb_meat_sala_burg_", "burg_chee_meat_ketc_burg_", "burg_chee_meat_sala_burg_"];
+    
+    volumeDown('minigame_bgm', 0.1);
+    setTimeout(function(){playAudio('minigame_bgm');},1500);
+    let miniGameBgm =  setInterval(function () { playAudio('minigame_bgm'); }, 16000);
+
+    //document.getElementById('coin-display').innerHTML = CoinManager.getCoin();
+    document.addEventListener('dragstart', function (e) {
+        e.dataTransfer.setData('Text', e.target.id);
+        document.getElementById(e.target.id).classList.add('dragging');
+    });
+
+    document.addEventListener('dragend', function (e) {
+        document.getElementById(e.target.id).classList.remove('dragging');
+    });
+
+    function AllowDrop(event) {
+        event.preventDefault();
+    }
+
+    TrashBin.addEventListener('dragenter', () => {
+        TrashBin.classList.add('open');
+    });
+
+    TrashBin.addEventListener('dragleave', () => {
+        TrashBin.classList.remove('open');
+    });
+
+    let timeLeft = 180;
+    const warningtime = 15;
+    const countdownElement = document.getElementById('game-clock-time');
+    let timer = setInterval(StartCountDown, 1000);
+    let StopGenerateOrders = setInterval(function () { GenerateOrders(); }, 10000);
+
+    function StartCountDown() {
+        timeLeft--;
+        if (timeLeft < 0) {
+            playAudio('end_game');
+            volumeDown('end_game',0.2);
+            stopAudio('minigame_bgm');
+            clearInterval(miniGameBgm);
+            clearInterval(timer);
+            countdownElement.textContent = "00:00";
+            clearInterval(StopGenerateOrders);
+            document.getElementById('end-game-box').style.display = 'block';
+            document.getElementById('success-order').innerHTML = "Order Finished: " + SuccessOrderNum;
+            document.getElementById('fail-order').innerHTML = "Order Missed: " + FailOrderNum;
+            let countUp = 0;
+            let StopCountUp = setInterval(function () {
+                if (countUp <= EarnMoney) {
+                    document.getElementById('earn-money-final').innerHTML = countUp;
+                    countUp++;
+                }
+                else clearInterval(StopCountUp);
+            }, 10);
+            document.getElementById('earn-money-final').innerHTML = EarnMoney;
+            CoinManager.addCoin(EarnMoney);
+            document.getElementById('coin-display').innerHTML = CoinManager.getCoin();
+            for (let i = 0; i < 4; ++i) {
+                clearInterval(StopOrderClockName[i]);
+                CancelOrder(document.getElementById('order-' + i), 'fail');
+            }
+            if (AchievementManager.getAc()[0] == 0 && EarnMoney >= 123) AchievementManager.newAc(0);
+            if (AchievementManager.getAc()[1] == 0 && FailOrderNum == 0) AchievementManager.newAc(1);
+            if (AchievementManager.getAc()[2] == 0 && SuccessOrderNum == 0) AchievementManager.newAc(2);
+            return;
+        }
+        const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        const seconds = (timeLeft % 60).toString().padStart(2, '0');
+        countdownElement.textContent = `${minutes}:${seconds}`;
+        if (timeLeft <= warningtime) {
+            countdownElement.classList.add('warning');
+        } else {
+            countdownElement.classList.remove('warning');
+        }
+    }
+
+    function EndGame() {
+        window.location.href = '../html/eastcanteen.html';
+        document.getElementById('end-game-box').style.display = 'none';
+        //玩家出来的位置要在厨房门口
+        //记录相关数据-待完成
+    }
+    function Throw(event) {
+        let id = event.dataTransfer.getData('text/plain');
+        let ITEM = document.getElementById(id);
+        TrashBin.classList.remove('open');
+        if (ITEM.className.substr(0, 12) == 'frying-chips') {
+            ITEM.style.display = 'none';
+            ITEM.classList.remove('fried');
+            NumberOfFryingChips--;
+            if (NumberOfFryingChips == 0) {
+                AbleToPressClockButton = true;
+                FryingChipsButton.classList.remove('disabled');
+            }
+            PosOfChips[id[13]] = 0;
+            SecondsBlockNum = 0;
+            document.getElementById('chips-frying-clock').style.display = 'none';
+        }
+        else if (ITEM.className.substr(0, 11) == 'frying-meat') {
+            ClearMeat(ITEM);
+        }
+        else if (id.substr(0, 4) == 'zone') {
+            let ITEMClassName = ITEM.className.substr(14, ITEM.className.length - 23);
+            ITEM.style.border = 'dashed';
+            ITEM.style.opacity = '0.8';
+            ITEM.classList.remove('dragging');
+            ITEM.draggable = false;
+            ITEM.classList.remove(ITEMClassName);
+            FoodLayer[id[5] - 1] = [0, 0, 0, 0, 0];
+        }
+    }
+
+    function ClearMeat(ITEM) {
+        let id = ITEM.id;
+        ITEM.style.display = 'none';
+        PosOfMeat[id[5]] = 0;
+        ITEM.classList.remove('fried', 'dragging', 'overfried');
+    }
+
+    function FullfillGlass(DrinkID) {
+        playAudio('click_button');
+        let Drink = document.getElementById(DrinkID);
+        setTimeout(function () {
+            playAudio('get_drink');
+            Drink.classList.add('full');
+            Drink.draggable = true;
+            Drink.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('Text', e.target.id);
+                Drink.classList.add('dragging');
+            });
+            Drink.addEventListener('dragend', (e) => {
+                Drink.classList.remove('dragging');
+            });
+        }, 5000);
+    }
+
+    function UnlockChips() {
+        if (ChipsBagIsLocked || ('ChipsBagIsLocked' in localStorage) == false) {
+            if (EarnMoney >= CostOfUnlockChips) {
+                ChipsBagIsLocked = false;
+                localStorage.setItem('ChipsBagIsLocked', 1);
+                EarnMoney -= CostOfUnlockChips;
+                EarnMoneyDisplay.innerHTML = "Earn " + EarnMoney;
+                alert('Time to fry some CHIPS!');
+                document.getElementById('unfried-chips').style.backgroundImage = 'url(../assets/elements_img/chips_bag.png)';
+            }
+            else {
+                alert('You need to EARN MORE to unlock this!');
+            }
+        }
+        else {
+            if (NumberOfFryingChips > 0 && AbleToPressClockButton == false) {
+                alert("Fried CHIPS aren't out of the POT yet!");
+                return;
+            }
+            for (let __id = 1; __id < 4; __id++) {
+                if (PosOfChips[__id] === 0) {
+                    PosOfChips[__id] = 1;
+                    NumberOfFryingChips++;
+                    SecondsBlockNum += 3;
+                    ChipsItem[__id].style.display = 'block';
+                    break;
+                }
+            }
+            SetFryChipsClock(NumberOfFryingChips);
+        }
+
+    }
+
+    function SetFryChipsClock(NumberOfUnfriedChips) {
+        switch (NumberOfUnfriedChips) {
+            case 0:
+                return;
+            case 3:
+                SecondsList[7].style.display = 'block';
+                SecondsList[8].style.display = 'block';
+                SecondsList[9].style.display = 'block';
+            case 2:
+                SecondsList[4].style.display = 'block';
+                SecondsList[5].style.display = 'block';
+                SecondsList[6].style.display = 'block';
+            case 1:
+                SecondsList[1].style.display = 'block';
+                SecondsList[2].style.display = 'block';
+                SecondsList[3].style.display = 'block';
+                document.getElementById('chips-frying-clock').style.display = 'block';
+                break;
+            default:
+        }
+    }
+
+    let SecondsList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let AbleToPressClockButton = true;
+    for (let _id = 1; _id < 10; ++_id) {
+        SecondsList[_id] = document.getElementById('chips-frying-' + _id + 's');
+    }
+    function StartClock() {
+        playAudio('click_button');
+        let Clock = document.getElementById('chips-frying-clock');
+        if (NumberOfFryingChips == 0) {
+            alert('Frying AIR?Interesting...');
+            return;
+        }
+        if (!AbleToPressClockButton) {
+            alert("Chips can't be fried twice!");
+            return;
+        }
+        AbleToPressClockButton = false;
+        FryingChipsButton.classList.add('disabled');
+
+        SecondsBlockNum = Math.min(9, SecondsBlockNum);
+        let StopChipsClock = setInterval(function () {
+            if (SecondsBlockNum > 0) SecondsList[SecondsBlockNum--].style.display = 'none';
+            else if (SecondsBlockNum == 0 && NumberOfFryingChips > 0) {
+                for (let __id = 1; __id < 4; ++__id) {
+                    if (PosOfChips[__id] == 0) continue;
+                    ChipsItem[__id].draggable = 'true';
+                    ChipsItem[__id].addEventListener('dragstart', () => {
+                        ChipsItem[__id].classList.add('dragging');
+                    });
+                    ChipsItem[__id].addEventListener('dragend', () => {
+                        ChipsItem[__id].classList.remove('dragging');
+                    });
+                    ChipsItem[__id].classList.add('fried');
+                }
+                Clock.style.display = 'none';
+                clearInterval(StopChipsClock);
+                playAudio('chip_fried');
+            }
+        }, 1000);
+    }
+
+    function AddRawMeat() {
+        for (let i = 0; i < 5; ++i) {
+            if (PosOfMeat[i] == 0) {
+                playAudio('fry_meat');
+                PosOfMeat[i] = 1;
+                MeatItem[i].style.display = 'block';
+                ClockItem[i].style.display = 'block';
+                let Point = document.getElementById('point-' + i);
+                StopMeatClock[i] = setInterval(function () { AnimateClock(Point, i); }, 2000);
+                break;
+            }
+        }
+    }
+
+    function AnimateClock(Point, i) {
+        playAudio('fry_meat');
+        ClockTime[i]++;
+        const rotation = -ClockTime[i] * 90;
+        Point.style.transform = `translate(-50%, -100%) rotate(${rotation}deg)`;
+        if (ClockTime[i] == 1) Point.style.borderBottomColor = '#2e7d32';
+        else if (ClockTime[i] == 2) Point.style.borderBottomColor = '#81c784';
+        else if (ClockTime[i] == 3) Point.style.borderBottomColor = '#ffeb3b';
+        else if (ClockTime[i] == 4) Point.style.borderBottomColor = '#f44336';
+        else if (4 < ClockTime[i] && ClockTime[i] < 9) {
+            ClockItem[i].style.display = 'none';
+            MeatItem[i].draggable = 'true';
+            MeatItem[i].classList.add('fried');
+            Point.style.borderBottomColor = '#2e7d32';
+            MeatItem[i].addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('Text', e.target.id);
+                MeatItem[i].classList.add('dragging');
+            });
+            MeatItem[i].addEventListener('dragend', (e) => {
+                ClockTime[i] = 0;
+                MeatItem[i].classList.remove('dragging');
+                Point.style.transform = `translate(-50%, -100%) rotate(${0}deg)`;
+                clearInterval(StopMeatClock[i]);
+            });
+
+        }
+        else {
+            MeatItem[i].classList.remove('fried');
+            MeatItem[i].classList.add('overfried');
+            stopAudio('fry_meat');
+        }
+    }
+
+    let Zone = [document.getElementById('zone-1'), document.getElementById('zone-2')];
+    let FoodLayer = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+    let layer = [[document.getElementById('layer-0'), document.getElementById('layer-1'), document.getElementById('layer-2'), document.getElementById('layer-3'), document.getElementById('layer-4')], [document.getElementById('layer--0'), document.getElementById('layer--1'), document.getElementById('layer--2'), document.getElementById('layer--3'), document.getElementById('layer--4')]];
+
+    function AssembleFood(event, ZoneTag) {
+        let ITEMID = event.dataTransfer.getData('text/plain');
+        let ITEMIDCODE = ITEMID.substr(0, 4);
+        let Item = document.getElementById(ITEMID);
+        let Layer;
+        switch (ITEMIDCODE) {
+            case 'burg':
+                if (FoodLayer[ZoneTag][0] == 0) {
+                    FoodLayer[ZoneTag][0] = ITEMIDCODE;
+                    layer[ZoneTag][0].style.display = 'block';
+                    Layer = 0;
+                }
+                else if (FoodLayer[ZoneTag][4] == 0) {
+                    FoodLayer[ZoneTag][4] = ITEMIDCODE;
+                    layer[ZoneTag][4].style.display = 'block';
+                    Layer = 4;
+                }
+                else return;
+                break;
+            case 'chee':
+            case 'cabb':
+                Layer = 1;
+                if (FoodLayer[ZoneTag][1] == 0) {
+                    FoodLayer[ZoneTag][1] = ITEMIDCODE;
+                    layer[ZoneTag][1].style.display = 'block';
+                }
+                else return;
+                break;
+            case 'ketc':
+            case 'sala':
+                playAudio('squeeze_bottle');
+                Layer = 3;
+                if (FoodLayer[ZoneTag][3] == 0) {
+                    FoodLayer[ZoneTag][3] = ITEMIDCODE;
+                    layer[ZoneTag][3].style.display = 'block';
+                }
+                else return;
+                break;
+            case 'meat':
+                if (Item.className.substr(Item.className.length - 18, 9) == 'overfried') {
+                    return;
+                }
+                Layer = 2;
+                if (FoodLayer[ZoneTag][2] == 0) {
+                    FoodLayer[ZoneTag][2] = ITEMIDCODE;
+                    layer[ZoneTag][2].style.display = 'block';
+                    ClearMeat(Item);
+                }
+                else return;
+                break;
+        }
+        layer[ZoneTag][Layer].style.backgroundImage = "url(../assets/elements_img/layer_" + Layer + '_' + ITEMIDCODE + ".png)";
+        layer[ZoneTag][Layer].style.backgroundRepeat = 'no-repeat';
+        layer[ZoneTag][Layer].style.backgroundPosition = 'center';
+    }
+
+    function FinishFood(ZoneTag) {
+        let FoodID = '';
+        for (let i = 0; i < 5; ++i) {
+            if (FoodLayer[ZoneTag][i] != 0) {
+                FoodID += FoodLayer[ZoneTag][i] + '_';
+            }
+            else if (i != 1) return;
+        }
+        if (FoodID.length < 20) {
+            return;
+        }
+        for (let i = 0; i < 5; ++i) {
+            if (FoodLayer[ZoneTag][i] != 0) {
+                layer[ZoneTag][i].style.display = 'none';
+                FoodLayer[ZoneTag][i] = 0;
+            }
+        }
+        Zone[ZoneTag].classList.add(FoodID)
+        Zone[ZoneTag].draggable = true;
+        Zone[ZoneTag].style.opacity = 1;
+        Zone[ZoneTag].style.cursor = 'grab';
+        Zone[ZoneTag].style.backgroundColor = 'transparent';
+        Zone[ZoneTag].style.border = 'none';
+        Zone[ZoneTag].addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('Text', e.target.id);
+            Zone[ZoneTag].classList.add('dragging');
+        });
+        Zone[ZoneTag].addEventListener('dragend', (e) => {
+            Zone[ZoneTag].classList.remove('dragging');
+        });
+    }
+
+    let StopOrderClockName = [0, 0, 0, 0];
+    let OrderTimeLeft = [0, 0, 0, 0];
+    let OrderBox = [document.getElementById('order-0'), document.getElementById('order-1'), document.getElementById('order-2'), document.getElementById('order-3')];
+
+    function GenerateOrders() {
+        if (NumberOfActiveOrders < MaxNumberOfOrders) {
+            let ActiveOrderID = 0;
+            for (; ActiveOrderID < 4; ++ActiveOrderID) {
+                if (NumberOfActiveMeals[ActiveOrderID] == 0) {
+                    NumberOfActiveOrders++;
+                    break;
+                }
+            }
+            if (ActiveOrderID > 3) return;
+            let NumberOfMeals = Math.floor(Math.random() * 100) % MaxTypesOfMealsPerOrder + 1;
+            NumberOfActiveMeals[ActiveOrderID] = NumberOfMeals;
+            let OrderList = new Array();
+            let NextOrder = OrderBox[ActiveOrderID];
+            for (let i = 0; i < NumberOfMeals; ++i) {
+                OrderList.push(AllMeals[Math.floor(Math.random() * 100) % TotalTypysOfMeals]);
+                NextOrder.innerHTML += "<div class='order-meal-box' id='" + OrderList[i] + "-order-" + ActiveOrderID + '-' + i + "' ondrop=\"FinishOrder(event , '" + OrderList[i] + "-order-" + ActiveOrderID + '-' + i + "')\"  ondragover='AllowDrop(event)' style = \"display: block; background-image:url('../assets/elements_img/" + OrderList[i] + ".png');background-position: center; background-size: 95%;background-repeat: no-repeat;\"></div>";
+            }
+            let OrderCountDownTime = NumberOfMeals * 20 + Math.floor(Math.random() * 100) % 6;
+            NextOrder.innerHTML += "<div class='order-clock-time' id='order-clock-" + ActiveOrderID + "' style=''>0" + Math.floor(OrderCountDownTime / 60) + ":" + (OrderCountDownTime % 60).toString().padStart(2, '0') + "</div>"
+            NextOrder.classList.add('active');
+            OrderTimeLeft[ActiveOrderID] = OrderCountDownTime;
+            StopOrderClockName[ActiveOrderID] = setInterval(() => { StartCountDownOrder(ActiveOrderID, NextOrder); }, 1000);
+        }
+    }
+
+    function StartCountDownOrder(ActiveOrderID, NextOrder) {
+        if (OrderBox[ActiveOrderID].style.display == 'none') return;
+        OrderTimeLeft[ActiveOrderID]--;
+        if (OrderTimeLeft[ActiveOrderID] < 0) {
+            CancelOrder(NextOrder, 'fail');
+            FailOrderNum++;
+            clearInterval(StopOrderClockName[ActiveOrderID]);
+            return;
+        }
+        const minutes = Math.floor(OrderTimeLeft[ActiveOrderID] / 60).toString().padStart(2, '0');
+        const seconds = (OrderTimeLeft[ActiveOrderID] % 60).toString().padStart(2, '0');
+        document.getElementById('order-clock-' + ActiveOrderID).textContent = `${minutes}:${seconds}`;
+    }
+
+    let MoneyEarnPerOrder = [0, 0, 0, 0];
+
+    function FinishOrder(event, MealID) {
+        let SubmitThingID = event.dataTransfer.getData('text/plain');
+        let SubmitThing = document.getElementById(SubmitThingID);
+        let SubmitThingClassName = SubmitThing.className.substr(14, SubmitThing.className.length - 23);
+        let Meal = document.getElementById(MealID);
+        let IDIndex = MealID.length - 3;
+        let OrderID = MealID[IDIndex];
+        let Order = OrderBox[OrderID];
+        if (MealID.substr(0, 5) == 'Chips' && SubmitThingID.substr(7, 5) == 'chips' && SubmitThing.draggable == true) {
+            PosOfChips[SubmitThingID[13]] = 0;
+            NumberOfFryingChips--;
+            if (NumberOfFryingChips == 0) {
+                AbleToPressClockButton = true;
+                FryingChipsButton.classList.remove('disabled');
+                document.getElementById('chips-frying-clock').style.display = 'none';
+            }
+            SubmitThing.classList.remove('dragging');
+            SubmitThing.classList.remove('fried');
+            SubmitThing.draggable = false;
+            SubmitThing.style.display = 'none';
+            Meal.style.display = 'none';
+            NumberOfActiveMeals[OrderID]--;
+            MoneyEarnPerOrder[OrderID] += 5;
+        }
+        else if (MealID.substr(0, IDIndex - 7) == SubmitThingClassName) {
+            SubmitThing.classList.remove('dragging');
+            SubmitThing.draggable = false;
+            let ZoneTag = SubmitThingID[5] - 1;
+            Zone[ZoneTag].style.opacity = 0.8;
+            Zone[ZoneTag].style.backgroundColor = 'wheat';
+            Zone[ZoneTag].style.border = 'dashed';
+            SubmitThing.classList.remove(SubmitThingClassName);
+            FoodLayer[ZoneTag] = [0, 0, 0, 0, 0];
+            Meal.style.display = 'none';
+            NumberOfActiveMeals[OrderID]--;
+            MoneyEarnPerOrder[OrderID] += 15;
+        }
+        else if (SubmitThing.className.substr(0, 5) == 'glass' && MealID.substr(0, 5) == SubmitThingID.substr(0, 5)) {
+            SubmitThing.classList.remove('full');
+            SubmitThing.draggable = false;
+            Meal.style.display = 'none';
+            NumberOfActiveMeals[OrderID]--;
+            MoneyEarnPerOrder[OrderID] += 3;
+        }
+        else if (SubmitThing.draggable == false) alert('Serve a raw thing is ILLEGAL!!!')
+        else {
+            SubmitThing.classList.remove('dragging');
+        }
+        if (NumberOfActiveMeals[OrderID] == 0) {
+            SuccessOrderNum++;
+            EarnMoney += MoneyEarnPerOrder[OrderID] * (DoubleMoney + 1);
+            MoneyEarnPerOrder[OrderID] = 0;
+            EarnMoneyDisplay.innerHTML = "Earn " + EarnMoney;
+            CancelOrder(Order, 'finished');
+            clearInterval(StopOrderClockName[OrderID]);
+        }
+    }
+    function CancelOrder(Order, State) {
+        if (State == 'finished') playAudio('order_success'),volumeDown('order_success', 0.1);
+        else playAudio('order_fail'),volumeDown('order_fail', 0.1);;
+        Order.classList.add(State);
+        setTimeout(function () { Order.classList.remove(State); Order.classList.remove('active'); }, 1500);
+        NumberOfActiveMeals[Order.id[6]] = 0;
+        MoneyEarnPerOrder[Order.id[6]] = 0;
+        Order.innerHTML = '';
+        NumberOfActiveOrders--;
+    }
+</script>

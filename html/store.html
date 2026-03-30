@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <link rel="stylesheet" href="../assets/style/menu.css">
+    <script src="../js/save.js"></script>
+    <link rel="stylesheet" href="../assets/style/store.css">
+    <script src="../js/achievement.js"></script>
+</head>
+
+<body>
+    <canvas id="inventory"></canvas>
+    <canvas id="Goods"></canvas>
+    <canvas id="colCanvas"></canvas>
+    <canvas id="shoot"></canvas>
+    <div class="Tips" id="tips" style="position: absolute;width: 500px;height: 100px;line-height: 100px;font-size: 25px;right: 100px;">0.Press 'b' to open your backpack<br>1.You can open it in almost EVERYWHERE<br>2.Click the icon of what you want to buy<br>3.No money? Then don't touch.</div>
+    <script src="../js/inventory.js"></script>
+    <script src="../js/store.js"></script>
+
+    <button id="menuButton" class="menu-button" onclick="toggleMenu()" title="menuButton"></button>
+    <div id="menuPanel" class="menu-panel">
+        <button id="saveButton" onclick="save()"></button>
+        <button id="quitButton" onclick="goHome()"></button>
+        <button id="resumeButton" onclick="toggleMenu()"></button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+</body>
+
+</html>

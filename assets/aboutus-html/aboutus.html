@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 下一组团队</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            color: #333;
+            background: linear-gradient(135deg, rgba(35, 45, 62, 0.85) 0%, rgba(57, 85, 114, 0.85) 100%), 
+                       url(/assets/style/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250830212726_80_37.png) no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            padding: 0;
+        }
+        
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.65) 100%);
+            z-index: -1;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #ff9e44;
+            transition: all 0.3s;
+        }
+        
+        img {
+            vertical-align: top;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 顶部标题区 */
+        .page-header {
+            text-align: center;
+            padding: 50px 0;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .page-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            color: rgba(255, 227, 185, 0.95);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 8px rgba(226, 255, 96, 0.6));
+        }
+        
+        .page-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #b1e3fd;
+            font-weight: 400;
+            position: relative;
+        }
+        
+        /* 团队简介区 */
+        .about-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 248, 248, 0.97) 100%);
+            border-radius: 18px;
+            padding: 40px 35px;
+            margin-bottom: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+        
+        .about-section:hover {
+            transform: translateY(-7px);
+        }
+        
+        .about-section:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9e44, #ffd8a9, #ffa755);
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #232d3f;
+            margin: 20px 0 25px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 12px;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, #ffa755, #ffca7b);
+            border-radius: 4px;
+        }
+        
+        .tagline-highlight {
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #d27f00;
+            margin: 25px 0 40px;
+            font-style: italic;
+        }
+        
+        .mission-content {
+            color: #444;
+            font-size: 1.15rem;
+            line-height: 1.85;
+            text-align: justify;
+            margin-bottom: 35px;
+        }
+        
+        .design-principles {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .principle-card {
+            flex: 0 0 30%;
+            min-width: 280px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 158, 68, 0.4);
+        }
+        
+        .principle-icon {
+            font-size: 3rem;
+            color: #ff9e44;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .principle-card:hover .principle-icon {
+            transform: rotate(10deg) scale(1.15);
+        }
+        
+        .principle-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #232d3f;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .principle-description {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* 团队成员区 */
+        .team-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 248, 248, 0.97) 100%);
+            border-radius: 18px;
+            padding: 40px 35px;
+            margin-bottom: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+        
+        .team-section:hover {
+            transform: translateY(-7px);
+        }
+        
+        .team-section:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9e44, #ffd8a9, #ffa755);
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 40px;
+        }
+        
+        .member-card {
+            flex: 0 0 250px;
+            text-align: center;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .member-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .member-avatar {
+            width: 100%;
+            height: 250px;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: flex-end;
+            transition: all 0.5s ease;
+        }
+        
+        .member-card:hover .member-avatar {
+            transform: scale(1.03);
+        }
+        
+        .member-info {
+            background: rgba(255, 255, 255, 0.97);
+            color: #232d3f;
+            padding: 20px 15px;
+            transition: all 0.4s ease;
+        }
+        
+        .member-card:hover .member-info {
+            background: linear-gradient(to bottom, #232d3f, #394d66);
+            color: white;
+        }
+        
+        .member-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        
+        .member-role {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: #ff9e44;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .member-card:hover .member-role {
+            color: #ffd8a9;
+        }
+        
+        /* 导航链接 */
+        .nav-links {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(35, 45, 62, 0.9);
+            color: #ffd8a9;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            gap: 10px;
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(to right, #ff9e44, #ffc58c);
+            color: #2c2c2c;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+        
+        .back-button i {
+            font-size: 1.3rem;
+        }
+        
+        /* 页脚 */
+        .footer {
+            padding: 40px 0 60px;
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            margin-top: 30px;
+        }
+        
+        .footer:before {
+            content: "";
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 235, 205, 0.6), 
+                transparent);
+            margin: 0 auto 25px;
+            width: 45%;
+        }
+        
+        .team-slogan {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255, 227, 185, 0.9);
+            letter-spacing: 1px;
+        }
+        @keyframes entry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated-entry {
+            animation: entry 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+        .delay-4 { animation-delay: 0.6s; }
+        .delay-5 { animation-delay: 0.75s; }
+        @media (max-width: 992px) {
+            .design-principles {
+                justify-content: center;
+            }
+            
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .principle-card {
+                flex: 0 0 100%;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .team-section, .about-section {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .mission-content {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header animated-entry">
+            <h1>下一组团队</h1>
+            <p class="page-subtitle">NEXT-GENERATION INNOVATORS</p>
+        </div>
+        <div class="about-section animated-entry delay-1">
+            <h2 class="section-title">关于我们</h2>
+            
+            <p class="tagline-highlight">我们不是下一位，而是突破界限的<span style="color:#e74c3c;font-weight:700">下一组</span></p>
+            
+            <div class="mission-content">
+                <p>“下一组”创新游戏开发团队秉持着<span style="font-weight:700;color:#ff6600">永不止步</span>的创新精神。我们的团队名代表着永远向下一关挑战的态度——这不是终点前的等待，而是突破边界的冲锋号角！</p>
+                
+                <p style="margin-top:25px">极简而丰盈是我们的核心设计理念：卓越的游戏应当像经典力学公式<span style="font-family: 'Orbitron', sans-serif;">F=ma</span>般简洁优雅，却又具备宇宙星辰般的无限惊喜与可能。</p>
+            </div>
+            
+            <div class="design-principles">
+                <div class="principle-card animated-entry delay-2">
+                    <div class="principle-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="principle-title">创新精神</h3>
+                    <p class="principle-description">
+                        拥抱未知，突破界限。每个创意都是颠覆传统的可能
+                    </p>
+                </div>
+                
+                <div class="principle-card animated-entry delay-3">
+                    <div class="principle-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <h3 class="principle-title">极简主义</h3>
+                    <p class="principle-description">
+                        复杂世界里的清晰表达，返璞归真的设计哲学
+                    </p>
+                </div>
+                
+                <div class="principle-card animated-entry delay-4">
+                    <div class="principle-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="principle-title">团队协作</h3>
+                    <p class="principle-description">
+                        多元力量汇聚成河，创意在碰撞中绽放光芒
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="team-section animated-entry delay-5">
+            <h2 class="section-title">团队成员</h2>
+            
+            <div class="team-members">
+                <a href="gyz.html" class="member-card animated-entry delay-1">
+                    <div class="member-avatar" style="background-image:linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)), url('../img/gyz.jpg')">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">高一之</div>
+                        <div class="member-role">主策划 & 创意总监</div>
+                    </div>
+                </a>
+                
+                <a href="lxj.html" class="member-card animated-entry delay-2">
+                    <div class="member-avatar" style="background-image:linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)), url('../img/lxj.jpg')">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">林小霁</div>
+                        <div class="member-role">系统设计师</div>
+                    </div>
+                </a>
+                
+                <a href="yny.html" class="member-card animated-entry delay-3">
+                    <div class="member-avatar" style="background-image:linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)), url('../img/yny.png')">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">余南逸</div>
+                        <div class="member-role">开发工程师</div>
+                    </div>
+                </a>
+                
+                <a href="fsy.html" class="member-card animated-entry delay-4">
+                    <div class="member-avatar" style="background-image:linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)), url('../img/fsy.jpg')">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">冯书瑶</div>
+                        <div class="member-role">UX/UI设计师</div>
+                    </div>
+                </a>
+                
+                <a href="xmq.html" class="member-card animated-entry delay-5">
+                    <div class="member-avatar" style="background-image:linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)), url('../img/xmq.jpg')">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">徐曼绮</div>
+                        <div class="member-role">美工 & 视觉设计</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="../../html/startgame.html" class="back-button animated-entry delay-3">
+                <i class="fas fa-arrow-left"></i>返回首页
+            </a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p class="team-slogan">每一次结束，都是新一章的开始</p>
+        <div>© 2025 下一组团队 | 极简规则 × 无限可能</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.principle-card, .member-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = card.classList.contains('member-card') 
+                        ? 'translateY(-15px)' 
+                        : 'translateY(-10px) scale(1.03)';
+                    card.style.boxShadow = '0 25px 40px rgba(0, 0, 0, 0.4)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1)';
+                    card.style.boxShadow = card.classList.contains('member-card') 
+                        ? '0 15px 35px rgba(0, 0, 0, 0.25)' 
+                        : '0 10px 25px rgba(0, 0, 0, 0.15)';
+                });
+            });
+            
+            document.body.style.opacity = 0;
+            setTimeout(function() {
+                document.body.style.transition = 'opacity 0.8s ease-in';
+                document.body.style.opacity = 1;
+            }, 200);
+            const icons = document.querySelectorAll('.principle-icon');
+            icons.forEach((icon) => {
+                setTimeout(() => {
+                    icon.style.opacity = 0;
+                    icon.style.transform = 'scale(0.8)';
+                    
+                    setTimeout(() => {
+                        icon.style.transition = 'all 0.6s ease-out';
+                        icon.style.opacity = 1;
+                        icon.style.transform = 'scale(1)';
+                    }, 50);
+                }, 400);
+            });
+        });
+    </script>
+</body>
+</html>

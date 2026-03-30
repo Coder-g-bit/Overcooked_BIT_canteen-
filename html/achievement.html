@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements</title>
+    <script src="../js/achievement.js"></script>
+    <style>
+        body{
+            background-color: wheat;
+        }
+        .game-box {
+            position: fixed;
+            width: 1250px;
+            height: 400px;
+            top: 250px;
+            left: 100px;
+            background-image: url(../assets/elements_img/achievement_background.png);
+            background-size: 25%;
+            background-position: center;
+        }
+
+        .game-box .player {
+            background-image: url(../assets/img/player.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            top: 525px;
+            left: 450px;
+            width: 70px;
+            height: 70px;
+            transition: transform 0.2s ease;
+            border-radius: 100%;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .game-box>.door {
+            width: 100px;
+            height: 200px;
+            top: 100px;
+            position: absolute;
+            background-color: transparent;
+            background-size: 200%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #enter-door {
+            background-image: url(../assets/elements_img/downstair.png);
+        }
+
+        #exit-door {
+            right: 0;
+            background-image: url(../assets/elements_img/upstair.png);
+        }
+
+        .game-box>.achievement-list {
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/achievement_list.png);
+            width: 1000px;
+            height: 125px;
+            position: absolute;
+            left: 125px;
+        }
+
+        #list-down {
+            bottom: 0;
+        }
+
+        .game-box>.achievement-list>.achievement-box {
+            background-color: transparent;
+            background-image: url(../assets/elements_img/Locked.png);
+            background-size: 90%;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 120px;
+            height: 120px;
+            float: left;
+            margin: 2.5px;
+            margin-left: 65px;
+        }
+
+        .show-achievement-box {
+            display: none;
+            position: absolute;
+            left: 475px;
+            width: 500px;
+            height: 270px;
+            background-color: transparent;
+            z-index: 1;
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/show_ach.png);
+        }
+
+        #achievement-img {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            margin: 30px;
+            background-color: wheat;
+            background-size: 90%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #lock-img {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            margin: 30px;
+            background-color: black;
+            background-image: url(../assets/elements_img/Locked_colorless.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 90%;
+            opacity: 0.9;
+        }
+
+        #achievements-text {
+            color: black;
+            width: 250px;
+            height: 200px;
+            position: absolute;
+            left: 215px;
+            top: 30px;
+            background-color: transparent;
+            line-height: 200px;
+            text-align: center;
+            font-size: 25px;
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/ach_text.png);
+        }
+
+        #lock-text {
+            width: 250px;
+            height: 200px;
+            position: absolute;
+            left: 215px;
+            top: 30px;
+            color: white;
+            line-height: 200px;
+            text-align: center;
+            font-size: 15px;
+            background-color: black;
+            opacity: 0.8;
+            box-shadow: 0 0 15px black;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="show-achievement-box" id="show-achievement">
+        <div class="achievement-img-box" id="achievement-img"></div>
+        <div class="lock-img-box" id="lock-img"></div>
+        <div class="achievements-text-box" id="achievements-text"></div>
+        <div class="lock-text-box" id="lock-text"></div>
+    </div>
+    <div class="game-box">
+        <div class="player" id="Player"></div>
+        <div class="door" id="enter-door"></div>
+        <div class="door" id="exit-door"></div>
+        <div class="achievement-list" id="list-up">
+            <div class="achievement-box" id="achievement-0"></div>
+            <div class="achievement-box" id="achievement-1"></div>
+            <div class="achievement-box" id="achievement-2"></div>
+            <div class="achievement-box" id="achievement-3"></div>
+            <div class="achievement-box" id="achievement-4"></div>
+        </div>
+        <div class="achievement-list" id="list-down">
+            <div class="achievement-box" id="achievement-5"></div>
+            <div class="achievement-box" id="achievement-6"></div>
+            <div class="achievement-box" id="achievement-7"></div>
+            <div class="achievement-box" id="achievement-8"></div>
+            <div class="achievement-box" id="achievement-9"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const keys = {};
+    const Player = document.getElementById('Player');
+    const playerR = 35;
+    const ConstSpeed = 2;
+    let speed = 2;
+    let posX = 0;
+    let posY = 165;
+
+    const ShowAchievement = document.getElementById('show-achievement');
+    const AchievementImg = document.getElementById('achievement-img');
+    const AchievementText = document.getElementById('achievements-text');
+    const ImgLockBox = document.getElementById('lock-img');
+    const TextLockBox = document.getElementById('lock-text');
+    const AchievementsBox = [{ block: document.getElementById('achievement-0'), middle: 190 }, { block: document.getElementById('achievement-1'), middle: 375 }, { block: document.getElementById('achievement-2'), middle: 560 }, { block: document.getElementById('achievement-3'), middle: 745 }, { block: document.getElementById('achievement-4'), middle: 930 }, { block: document.getElementById('achievement-5'), middle: 190 }, { block: document.getElementById('achievement-6'), middle: 375 }, { block: document.getElementById('achievement-7'), middle: 560 }, { block: document.getElementById('achievement-8'), middle: 745 }, { block: document.getElementById('achievement-9'), middle: 930 }];
+    const LockText = ["在一局小游戏内获得123鼠片及以上","完成一局小游戏且无订单失败","完成一局小游戏且无订单成功","与所有NPC对话","通关游戏而不和任何NPC对话","在拥有0鼠片时进入商店","拥有所有道具","开启并进入秘密房间","镇压众鼠对美食的诉求","实现白梨大学美食自给自足"];
+    const UnlockText = ["鼠能生巧","鼠而不漏","鼠手无策","各鼠己见","Quiet as a mouse","Poor as a mouse","Pack Rat","Rat some out","罄竹难鼠","鼠一鼠二"];
+
+    window.addEventListener('keydown', (e) => {
+        keys[e.key] = true;
+    });
+
+    window.addEventListener('keyup', (e) => {
+        keys[e.key] = false;
+    });
+    let AchievementsList = AchievementManager.getAc();
+
+    for (let i = 0; i < 10; ++i) {
+        if(AchievementsList[i] == 1){
+            AchievementsBox[i].block.style.backgroundImage = `url(../assets/elements_img/achievement_${i}.png)`;
+        }
+    }
+
+    function CheckBlock(x, y, w, h) {
+        let Left = x;
+        let Bottom = y + h;
+        let Right = x + w;
+        let Top = y;
+        let middleX = posX + playerR;
+        let middleY = posY + playerR;
+        let err = speed;
+        if (Left <= middleX && middleX <= Right && middleY + playerR <= Top + err) posY = Math.min(Top - 2 * playerR, posY);
+        if (Left <= middleX && middleX <= Right && posY >= Bottom - err) posY = Math.max(Bottom, posY);
+        if (Top <= middleY && middleY <= Bottom && middleX + playerR <= Left + err) posX = Math.min(Left - 2 * playerR, posX);
+        if (Top <= middleY && middleY <= Bottom && posX >= Right - err) posX = Math.max(Right, posX);
+        if ((middleX - Left) * (middleX - Left) + (middleY - Top) * (middleY - Top) <= playerR * playerR - err) posX -= err, posY -= err;
+        if ((middleX - Left) * (middleX - Left) + (middleY - Bottom) * (middleY - Bottom) <= playerR * playerR - err) posX -= err, posY += err;
+        if ((middleX - Right) * (middleX - Right) + (middleY - Top) * (middleY - Top) <= playerR * playerR - err) posX += err, posY -= err;
+        if ((middleX - Right) * (middleX - Right) + (middleY - Bottom) * (middleY - Bottom) <= playerR * playerR - err) posX += err, posY += err;
+    }
+
+    function SelectBlock() {
+        let flag = 0;
+        let ActiveBlock = -1;
+        for (let i = 0; i < 5; ++i) {
+            if (AchievementsBox[i].middle <= posX && posX <= AchievementsBox[i].middle + 185) {
+                if (posY > 175) flag = 1;
+                else flag = 0;
+                ActiveBlock = i + 5 * flag;
+                break;
+            }
+        }
+        if (ActiveBlock != -1) {
+            ShowAchievement.style.display = 'block';
+            AchievementImg.style.backgroundImage = "url('../assets/elements_img/achievement_" + ActiveBlock + ".png')";
+            if(AchievementsList[ActiveBlock] == 1){
+                ImgLockBox.style.opacity = 0;
+                TextLockBox.style.opacity = 0;
+                AchievementText.innerText = UnlockText[ActiveBlock];
+            }
+            else {
+                ImgLockBox.style.opacity = 0.9;
+                TextLockBox.style.opacity = 0.8;
+                TextLockBox.innerText = LockText[ActiveBlock];
+            }
+            ActiveBlock = -1
+        }
+    }
+
+    function GameLoop() {
+        if ((keys['w'] || keys['a'] || keys['s'] || keys['d']) && speed) {
+            // console.log(1);
+            // playAudio("walking-sound");
+        }
+        if (keys['w'] && keys['a']) {
+            posY -= speed;
+            posX -= speed;
+            Player.style.transform = 'rotate(-45deg)';
+        } else if (keys['w'] && keys['d']) {
+            posY -= speed;
+            posX += speed;
+            Player.style.transform = 'rotate(45deg)';
+        } else if (keys['s'] && keys['a']) {
+            posY += speed;
+            posX -= speed;
+            Player.style.transform = 'rotate(-135deg)';
+        } else if (keys['s'] && keys['d']) {
+            posY += speed;
+            posX += speed;
+            Player.style.transform = 'rotate(135deg)';
+        } else if (keys['w']) {
+            posY -= speed;
+            Player.style.transform = 'rotate(0deg)';
+        } else if (keys['a']) {
+            posX -= speed;
+            Player.style.transform = 'rotate(-90deg)';
+        } else if (keys['s']) {
+            posY += speed;
+            Player.style.transform = 'rotate(180deg)';
+        } else if (keys['d']) {
+            posX += speed;
+            Player.style.transform = 'rotate(90deg)';
+        } else {
+            Player.style.transform = 'rotate(0deg)';
+        }
+        console.log(posX,posY)
+        SelectBlock();
+        posX = Math.max(0, Math.min(1180, posX));
+        posY = Math.max(0, Math.min(330, posY));
+        CheckBlock(125, 0, 1000, 125);
+        CheckBlock(125, 275, 1000, 125);
+        Player.style.left = posX + 'px';
+        Player.style.top = posY + 'px';
+        if(posX > 1100 && 160 < posY && posY < 240){
+            window.location.href = 'startgame.html';
+        }
+        requestAnimationFrame(GameLoop);
+    }
+
+    GameLoop();
+</script>

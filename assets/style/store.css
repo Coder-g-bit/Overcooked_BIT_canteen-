@@ -1,0 +1,39 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: wheat;
+    margin: 0;
+    padding: 0;
+}
+
+#inventory {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    opacity: 1;
+    z-index: 2;
+}
+
+#Goods {
+    position: absolute;
+    left: 20%;
+    top: 0;
+    opacity: 1;
+    z-index: 1;
+}
+
+#colCanvas {
+    position: absolute;
+    left: 20%;
+    top: 0;
+    opacity: 0;
+    z-index: 3;
+}
+
+#shoot {
+    position: absolute;
+    left: 20%;
+    top: 80%;
+    z-index: 4;
+}

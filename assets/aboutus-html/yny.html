@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余南逸 - 游戏开发者</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            color: #333;
+            background: linear-gradient(135deg, rgba(35, 45, 62, 0.85) 0%, rgba(57, 85, 114, 0.85) 100%), 
+                       url(/assets/style/img/3.png) no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+        
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+            z-index: -1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ff9e44;
+            transition: all 0.3s;
+        }
+
+        .header {
+            padding: 40px 0 30px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: rgba(255, 227, 185, 0.95);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 8px rgba(226, 255, 96, 0.6));
+        }
+        
+        .header .title-deco {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.3rem;
+            color: #b1e3fd;
+            font-weight: 300;
+            position: relative;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .header .title-deco:before, .header .title-deco:after {
+            content: "◆";
+            color: #ffa755;
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 1.4rem;
+            vertical-align: middle;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .profile-image {
+            flex: 0 0 320px;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 235, 205, 0.85);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 0 8px rgba(255, 199, 117, 0.5);
+        }
+        
+        .role-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(to right, rgba(35, 45, 62, 0.9), rgba(57, 85, 114, 0.9));
+            color: #ffd8a9;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.15rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 248, 248, 0.94) 100%);
+            border-radius: 18px;
+            padding: 40px 35px 35px;
+            margin-top: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+        
+        .main-content:hover {
+            transform: translateY(-7px);
+        }
+        
+        .main-content:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9e44, #ffd8a9, #ffa755);
+        }
+
+        .subsection {
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #232d3f;
+            margin: 20px 0 25px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffa755, #ffca7b);
+            border-radius: 4px;
+        }
+
+        .bio-content {
+            color: #444;
+            font-size: 1.15rem;
+            line-height: 1.85;
+            text-align: justify;
+            margin: 10px 0 25px;
+        }
+        
+        .design-highlight {
+            background: linear-gradient(to right, #ffecd7, #ffd7a8);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .design-highlight:before {
+            content: "\201C";
+            position: absolute;
+            top: -20px;
+            left: 15px;
+            font-family: 'Georgia', serif;
+            font-size: 5rem;
+            color: rgba(255, 168, 76, 0.2);
+        }
+        
+        .design-highlight:after {
+            content: "\201D";
+            position: absolute;
+            bottom: -20px;
+            right: 15px;
+            font-family: 'Georgia', serif;
+            font-size: 5rem;
+            color: rgba(255, 168, 76, 0.2);
+        }
+        
+        .design-highlight h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .games-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .game-card {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 168, 76, 0.4);
+        }
+        
+        .game-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff9e44, #ffd8a9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+        }
+        
+        .game-details {
+            flex: 1;
+        }
+        
+        .game-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: #232d3f;
+            margin-bottom: 5px;
+        }
+        
+        .game-category {
+            color: #637d78;
+            font-weight: 500;
+            background: rgba(255, 225, 185, 0.3);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .game-highlights {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .pills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0 35px;
+        }
+
+        .pill {
+            background: rgba(35, 45, 62, 0.8);
+            color: #fffbe0;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .pill:hover {
+            background: linear-gradient(to right, #ff9e44, #ffba76);
+            transform: scale(1.05);
+            color: #2c2c2c;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .mulu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            padding: 15px 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .mulu a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(35, 45, 62, 0.9);
+            color: #ffd8a9;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            gap: 10px;
+        }
+        
+        .mulu a:hover {
+            background: linear-gradient(to right, #ff9e44, #ffc58c);
+            color: #2c2c2c;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+        
+        .mulu a i {
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            margin-top: 30px;
+        }
+        
+        .footer:before {
+            content: "";
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 235, 205, 0.6), transparent);
+            margin: 0 auto 25px;
+            width: 45%;
+        }
+        @media (max-width: 868px) {
+            .header h1 {
+                font-size: 3.2rem;
+            }
+            
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .profile-image {
+                flex: 0 0 auto;
+                max-width: 280px;
+                margin-top: 0;
+            }
+            
+            .main-content {
+                margin-top: 0;
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.4rem;
+            }
+            
+            .header .title-deco {
+                font-size: 1rem;
+            }
+            
+            .header .title-deco:before, 
+            .header .title-deco:after {
+                margin: 0 8px;
+                font-size: 1rem;
+            }
+            
+            .mulu {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .mulu a {
+                width: 100%;
+            }
+        }
+        @keyframes entry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated-entry {
+            animation: entry 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <div class="header animated-entry">
+        <h1>余南逸</h1>
+        <p class="title-deco">游戏设计师 · 程序员</p>
+    </div>
+    
+    <div class="container">
+        <div class="profile-image animated-entry delay-1">
+            <div class="role-badge">程序员 · 设计思想者</div>
+            <img src="../img/yny.png" alt="余南逸">
+        </div>
+        
+        <div class="main-content animated-entry delay-2">
+            <div class="subsection">
+                <h2 class="section-title">游戏哲学</h2>
+                <div class="bio-content">
+                    <p>大家好！我是余南逸，是下一组里的程序员。除了编程，我还热爱跑步、音乐和阅读。作为一个游戏爱好者，我认为游戏的魅力在于它能够融合规则与创意，创造出源源不断的乐趣。</p>
+                    
+                    <div class="design-highlight">
+                        <h3>简单·丰富·快乐</h3>
+                        <p>一款优秀游戏应该是「核心简单 × 内容丰富」的矛盾统一体：核心规则要够简单，方便玩家快速掌握不会"迷路"，同时游戏内容和事件又要足够丰富，让玩家时刻体验新鲜感。</p>
+                    </div>
+                    
+                    <p>在单机游戏中，我喜欢在稳定流程中加入策略性的随机事件；而在联机游戏中，我偏重合作而非竞争——队友的击掌欢呼永远比胜利提示更让人心动。</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h2 class="section-title">游戏案例</h2>
+                <div class="games-flex">
+                    <div class="game-card animated-entry delay-2">
+                        <div class="game-icon">
+                            🃏
+                        </div>
+                        <div class="game-details">
+                            <div class="game-name">小丑牌</div>
+                            <div class="game-category">扑克rougelike</div>
+                            <div class="game-highlights">简单核心规则：打大牌赚分，不同遗物(Joker)的配合创造了无限可能</div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card animated-entry delay-3">
+                        <div class="game-icon">
+                            🎵
+                        </div>
+                        <div class="game-details">
+                            <div class="game-name">邦多利</div>
+                            <div class="game-category">音乐社交游戏</div>
+                            <div class="game-highlights">核心玩法是简单音游，通过卡组配合和多人协作模式获得深度体验</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="design-highlight" style="margin-top: 35px;">
+                    <h3>设计的魅力</h3>
+                    <p>《小丑牌》用简单的扑克规则为基底，通过改变核心机制的Joker牌不断制造惊喜；《邦多利》则用基础音游框架承载玩家间的创意交流和协作舞台——这就是我的理想游戏：「简单规则减轻认知负担，丰富体验创造永恒乐趣」</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h2 class="section-title">设计理念</h2>
+                <div class="pills-container">
+                    <div class="pill">核心简单化</div>
+                    <div class="pill">内容多样化</div>
+                    <div class="pill">策略随机性</div>
+                    <div class="pill">协同优先</div>
+                    <div class="pill">用户共创</div>
+                    <div class="pill">惊喜涌现</div>
+                    <div class="pill">轻松上手</div>
+                    <div class="pill">深度探索</div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">导航</h2>
+            <div class="mulu">
+                <a href="lxj.html" class="animated-entry delay-3">
+                    <i class="fas fa-arrow-left"></i>林小霁
+                </a>
+                <a href="aboutus.html" class="animated-entry delay-4">
+                    <i class="fas fa-home"></i>返回首页
+                </a>
+                <a href="fsy.html" class="animated-entry delay-5">
+                    <i class="fas fa-arrow-right"></i>冯书瑶
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2025 下一组团队 | 简单规则 × 无限体验
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileImg = document.querySelector('.profile-image img');
+            profileImg.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.03)';
+            });
+            
+            profileImg.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+            const gameCards = document.querySelectorAll('.game-card');
+            gameCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.animated-entry');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight * 0.85) {
+                    el.style.opacity = 1;
+                }
+            });
+        });
+        document.body.style.opacity = 0;
+        setTimeout(function() {
+            document.body.style.transition = 'opacity 1s ease-in';
+            document.body.style.opacity = 1;
+        }, 100);
+    </script>
+</body>
+</html>

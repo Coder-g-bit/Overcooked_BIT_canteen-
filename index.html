@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Overcooked : The Canteen of BIT-Login</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/style/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <audio id="loginbgm" src="./bgm/login_bgm.mp3" hidden="hidden"></audio> -->
+    <script src="js/recorder.js"></script>
+    <script src="js/login.js" defer></script>
+</head>
+
+<body style="background-image: url(./assets/elements_img/login_background.png);">
+    <div class="loginmain" id="loginpage" style="display: block;color: #015B28;">
+        <div class="title">Login</div>
+        <div class="inputform">
+            <form>
+                <div class="field">
+                    <input type="text" placeholder="Username" id="username" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Password" id="password" required>
+                </div>
+            </form>
+        </div>
+        <div class="loginbutton" onclick="Login()">Login</div>
+        <div class="subtext">Without an account?<label
+                style="border-bottom: 1px solid blue;cursor: pointer;color: blue;"
+                onclick="toRegister()">Register</label>
+        </div>
+    </div>
+
+    <div class="loginmain" id="registerpage" style="display: none;color: #015B28;">
+        <div class="title">Register</div>
+        <div class="inputform">
+            <form>
+                <div class="field">
+                    <input type="text" placeholder="please type your username" id="RegisterUsername" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="please type your password" id="RegisterPassword1" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="confirm your password" id="RegisterPassword2" required>
+                </div>
+            </form>
+        </div>
+        <div class="loginbutton" onclick="Register()">Register</div>
+        <div class="subtext">Already had an account?<label
+                style="border-bottom: 1px solid blue;cursor: pointer;color: blue;" onclick="toLogin()">Login</label>
+        </div>
+    </div>
+</body>
+
+</html>

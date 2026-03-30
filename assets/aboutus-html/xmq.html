@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐曼绮 - UI设计师 & 美工</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            color: #333;
+            background: linear-gradient(135deg, rgba(35, 45, 62, 0.85) 0%, rgba(57, 85, 114, 0.85) 100%), 
+                       url(/assets/style/img/5.png) no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+        
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+            z-index: -1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ff9e44;
+            transition: all 0.3s;
+        }
+
+        .header {
+            padding: 40px 0 30px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: rgba(255, 227, 185, 0.95);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 8px rgba(226, 255, 96, 0.6));
+        }
+        
+        .header .title-deco {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.3rem;
+            color: #b1e3fd;
+            font-weight: 300;
+            position: relative;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .header .title-deco:before, .header .title-deco:after {
+            content: "◆";
+            color: #ffa755;
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 1.4rem;
+            vertical-align: middle;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .profile-image {
+            flex: 0 0 320px;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 235, 205, 0.85);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 0 8px rgba(255, 199, 117, 0.5);
+        }
+        
+        .role-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(to right, rgba(35, 45, 62, 0.9), rgba(57, 85, 114, 0.9));
+            color: #ffd8a9;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.15rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 248, 248, 0.94) 100%);
+            border-radius: 18px;
+            padding: 40px 35px 35px;
+            margin-top: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+        
+        .main-content:hover {
+            transform: translateY(-7px);
+        }
+        
+        .main-content:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9e44, #ffd8a9, #ffa755);
+        }
+
+        .subsection {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #232d3f;
+            margin: 20px 0 25px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffa755, #ffca7b);
+            border-radius: 4px;
+        }
+
+        .bio-content {
+            color: #444;
+            font-size: 1.15rem;
+            line-height: 1.85;
+            text-align: justify;
+        }
+        
+        .design-highlight {
+            background: linear-gradient(to right, #ffecd7, #ffd7a8);
+            padding: 22px 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .design-highlight h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .design-highlight h3 i {
+            margin-right: 15px;
+            color: #ff9e44;
+        }
+        
+        .design-highlight p {
+            line-height: 1.85;
+        }
+
+        .quote-mark {
+            position: absolute;
+            font-family: Georgia, serif;
+            font-size: 5rem;
+            color: rgba(255, 168, 76, 0.15);
+            z-index: 0;
+        }
+
+        .open-quote {
+            top: -10px;
+            left: 15px;
+        }
+
+        .close-quote {
+            bottom: -35px;
+            right: 15px;
+        }
+        
+        /* 设计理念可视化展示 */
+        .design-preview {
+            width: 100%;
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+            transition: all 0.4s ease;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .design-preview:hover {
+            transform: scale(1.01);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .design-circles {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+        
+        .design-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd8a9, #ff9e44);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .design-circle:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .design-circle i {
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+        
+        .design-circle span {
+            font-weight: 600;
+            color: #2c2c2c;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 0 5px;
+        }
+        
+        .design-process {
+            position: relative;
+            height: 120px;
+            margin: 40px 0;
+        }
+        
+        .process-line {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            width: 90%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff9e44, #ffd8a9);
+            z-index: 1;
+            border-radius: 10px;
+        }
+        
+        .process-step {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            width: 85px;
+            z-index: 2;
+        }
+        
+        .process-step:nth-child(2) { left: 0%; }
+        .process-step:nth-child(3) { left: 25%; }
+        .process-step:nth-child(4) { left: 50%; }
+        .process-step:nth-child(5) { left: 75%; }
+        .process-step:nth-child(6) { left: 100%; }
+        
+        .process-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 12px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #ff9e44;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .process-icon:hover {
+            transform: scale(1.15);
+            background: #ffd8a9;
+            color: white;
+        }
+        
+        .process-text {
+            font-weight: 600;
+            color: #232d3f;
+        }
+        
+        .mulu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            padding: 15px 0;
+            margin-top: 10px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .mulu a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(35, 45, 62, 0.9);
+            color: #ffd8a9;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            gap: 10px;
+        }
+        
+        .mulu a:hover {
+            background: linear-gradient(to right, #ff9e44, #ffc58c);
+            color: #2c2c2c;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+        
+        .mulu a i {
+            font-size: 1.2rem;
+        }
+        
+        .no-next a:hover {
+            background: rgba(35, 45, 62, 0.9);
+            transform: translateY(0);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            cursor: default;
+        }
+
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            margin-top: 30px;
+        }
+        
+        .footer:before {
+            content: "";
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 235, 205, 0.6), transparent);
+            margin: 0 auto 25px;
+            width: 45%;
+        }
+        @media (max-width: 868px) {
+            .header h1 {
+                font-size: 3.2rem;
+            }
+            
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .profile-image {
+                flex: 0 0 auto;
+                max-width: 280px;
+                margin-top: 0;
+            }
+            
+            .main-content {
+                margin-top: 0;
+                padding: 25px;
+            }
+            
+            .design-circles {
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                gap: 20px;
+            }
+            
+            .design-circle {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.4rem;
+            }
+            
+            .header .title-deco {
+                font-size: 1rem;
+            }
+            
+            .header .title-deco:before, 
+            .header .title-deco:after {
+                margin: 0 8px;
+                font-size: 1rem;
+            }
+            
+            .mulu {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .mulu a {
+                width: 100%;
+            }
+        }
+        @keyframes entry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated-entry {
+            animation: entry 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <div class="header animated-entry">
+        <h1>徐曼绮</h1>
+        <p class="title-deco">UI设计师 · 视觉艺术家</p>
+    </div>
+    
+    <div class="container">
+        <div class="profile-image animated-entry delay-1">
+            <div class="role-badge">首席UI & 美工设计</div>
+            <img src="../img/xmq.jpg" alt="徐曼绮">
+        </div>
+        
+        <div class="main-content animated-entry delay-2">
+            <div class="subsection">
+                <h2 class="section-title">艺术与设计</h2>
+                <div class="bio-content">
+                    <p>大家好呀！我是徐曼绮，来自人工智能与税收学专业，在团队中主要负责游戏的UI设计与美工工作。</p>
+                    
+                    <div class="design-highlight" style="position: relative;">
+                        <span class="quote-mark open-quote">“</span>
+                        <span class="quote-mark close-quote">”</span>
+                        <h3><i class="fas fa-paint-brush"></i>画笔是我的第二语言</h3>
+                        <p>我从小就沉浸在绘画艺术中——当画笔赋予白纸灵魂时，时间仿佛也凝固了。现在，这份旅程中的每一页都将为我们的游戏注入独特韵味。</p>
+                    </div>
+                    
+                    <p>这次游戏美术创作之旅对我而言意义非凡！虽然过程中会面对界面细节和视觉风格的挑战，但我相信在策划、程序团队的合作下，通过精心打磨，我们一定能创造出独特的视觉风格。</p>
+                </div>
+            </div>
+            
+            <div class="subsection" style="border-radius: 15px;">
+                <h2 class="section-title">设计理念展示</h2>
+                <div class="design-preview animated-entry delay-2">
+                    <div class="design-circles">
+                        <div class="design-circle">
+                            <i class="fas fa-eye"></i>
+                            <span>视觉吸引力</span>
+                        </div>
+                        <div class="design-circle">
+                            <i class="fas fa-palette"></i>
+                            <span>色彩协调</span>
+                        </div>
+                        <div class="design-circle">
+                            <i class="fas fa-hand-point-up"></i>
+                            <span>用户友好</span>
+                        </div>
+                        <div class="design-circle">
+                            <i class="fas fa-fire-alt"></i>
+                            <span>鲜活生动</span>
+                        </div>
+                    </div>
+                    
+                    <div class="design-process">
+                        <div class="process-line"></div>
+                        <div class="process-step">
+                            <div class="process-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="process-text">构思</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-icon">
+                                <i class="fas fa-pencil-alt"></i>
+                            </div>
+                            <div class="process-text">草图</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-icon">
+                                <i class="fas fa-brush"></i>
+                            </div>
+                            <div class="process-text">创作</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="process-text">迭代</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="process-text">定稿</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="design-highlight animated-entry delay-3">
+                    <h3><i class="fas fa-heart"></i>期待完美的视觉体验</h3>
+                    <p>我期待着我们的小作品能呈现既舒适又惊艳的视觉效果。想象各位在探索游戏时，能发现我们精心埋下的情感细节——那将是对我们团队最有意义的回报。</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h2 class="section-title">艺术信条</h2>
+                <div class="design-highlight animated-entry delay-4">
+                    <div style="font-style: italic; font-weight: 500; text-align: center; margin: 10px 0 20px;">
+                        "每秒60帧才够流畅，但每个像素都值得精雕细琢<br>
+                        UI如同一盘好菜——既赏心悦目，又回味悠长<br>
+                        所谓完美设计，是你不知不觉沉浸其中<br>
+                        却在惊觉时发现自己早已愉悦满盈"
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mulu">
+                <a href="fsy.html" class="animated-entry delay-3">
+                    <i class="fas fa-arrow-left"></i>冯书瑶
+                </a>
+                <a href="aboutus.html" class="animated-entry delay-4">
+                    <i class="fas fa-home"></i>返回首页
+                </a>
+                <a href="" class="animated-entry delay-5" style="cursor: default; background: rgba(35, 45, 62, 0.7); color: rgba(255, 216, 169, 0.7);">
+                    <i class="fas fa-ban"></i>最后一页
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2025 下一组团队 | 让每一个像素都有温度
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileImg = document.querySelector('.profile-image img');
+            profileImg.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.03)';
+            });
+            
+            profileImg.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.45)';
+            });
+            document.body.style.opacity = 0;
+            setTimeout(function() {
+                document.body.style.transition = 'opacity 1s ease-in';
+                document.body.style.opacity = 1;
+            }, 100);
+            const circles = document.querySelectorAll('.design-circle');
+            circles.forEach((circle, i) => {
+                setTimeout(() => {
+                    circle.style.opacity = 0;
+                    circle.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        circle.style.transition = 'all 0.6s ease-out';
+                        circle.style.opacity = 1;
+                        circle.style.transform = 'translateY(0)';
+                    }, 100);
+                }, 300 * i);
+            });
+        });
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.animated-entry');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight * 0.85) {
+                    el.style.opacity = 1;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

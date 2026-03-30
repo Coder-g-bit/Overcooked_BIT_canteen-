@@ -1,0 +1,990 @@
+body{
+    background-color: wheat;
+}
+
+.game-box {
+    position: fixed;
+    width: 1000px;
+    height: 700px;
+    background-color: bisque;
+    background-position: top left;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/mini_game_1_background.png);
+    top: 10px;
+    left: 400px;
+}
+
+.game-box .working-box {
+    background-color: transparent;
+    position: relative;
+    float: left;
+}
+
+#working-box-horizontal .beverage-machine {
+    background-color: transparent;
+    position: absolute;
+    transform: skewX(35deg);
+    width: 200px;
+    height: 170px;
+    right: 70px;
+    top: -130px;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/beverage_machine.png);
+}
+
+#working-box-horizontal .beverage-machine .drink-valve {
+    width: 20px;
+    height: 12px;
+    position: relative;
+    float: left;
+    top: 88px;
+    left: 18px;
+    margin-left: 40px;
+    background-color: transparent;
+}
+
+#working-box-horizontal .beverage-machine .glass {
+    width: 32px;
+    margin-left: 45px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#Cola_ {
+    height: 40px;
+    left: 10px;
+    bottom: 20px;
+    background-size: 90%;
+    background-image: url(../elements_img/glass.png);
+}
+
+#Cola_.full {
+    background-size: 140%;
+    background-image: url(../elements_img/Cola_.png);
+}
+
+#Cola_.dragging {
+    cursor: grab;
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#Ice_tea_ {
+    height: 40px;
+    right: 53px;
+    bottom: 20px;
+    background-size: 90%;
+    background-image: url(../elements_img/glass.png);
+}
+
+#Ice_tea_.full {
+    bottom: 17px;
+    height: 55px;
+    width: 40px;
+    background-size: 145%;
+    background-image: url(../elements_img/ice_tea_.png);
+}
+
+#Ice_tea_.dragging {
+    cursor: grab;
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#working-box-horizontal .prepare-box {
+    position: absolute;
+    float: left;
+    border: dashed;
+    border-radius: 20%;
+    width: 270px;
+    height: 80px;
+    background-color: transparent;
+    right: 160px;
+    bottom: 10px;
+}
+
+#prepare-box .assemble-zone {
+    border: dashed;
+    border-radius: 30%;
+    background-color: wheat;
+    opacity: 0.8;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/prepare_box.png);
+    cursor: pointer;
+}
+
+#prepare-box .assemble-zone.burg_meat_ketc_burg_ {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/burg_meat_ketc_burg_.png);
+}
+
+#prepare-box .assemble-zone.burg_meat_sala_burg_ {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/burg_meat_sala_burg_.png);
+}
+
+#prepare-box .assemble-zone.burg_cabb_meat_ketc_burg_ {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/burg_cabb_meat_ketc_burg_.png);
+}
+
+#prepare-box .assemble-zone.burg_cabb_meat_sala_burg_ {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/burg_cabb_meat_sala_burg_.png);
+}
+
+#prepare-box .assemble-zone.burg_chee_meat_ketc_burg_ {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/burg_chee_meat_ketc_burg_.png);
+}
+
+#prepare-box .assemble-zone.burg_chee_meat_sala_burg_ {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    background-image: url(../elements_img/burg_chee_meat_sala_burg_.png);
+}
+
+#zone-1 {
+    transform: skewX(35deg);
+    position: absolute;
+    left: 10px;
+    width: 90px;
+    height: 70px;
+    top: -25px;
+}
+
+#zone-1 .dragging {
+    cursor: grab;
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#zone-2 {
+    transform: skewX(35deg);
+    position: absolute;
+    right: 35px;
+    width: 90px;
+    height: 70px;
+    top: -25px;
+}
+
+#zone-2 .dragging {
+    cursor: grab;
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#layer-0 {
+    opacity: 100%;
+    position: absolute;
+    height: 16px;
+    width: 80px;
+    bottom: 3px;
+    left: 5px;
+    background-size: 70%;
+}
+
+#layer-1 {
+    position: absolute;
+    opacity: 100%;
+    height: 16px;
+    width: 80px;
+    bottom: 16px;
+    left: 5px;
+    background-size: 80%;
+}
+
+#layer-2 {
+    position: absolute;
+    height: 16px;
+    width: 80px;
+    bottom: 29px;
+    left: 5px;
+    background-size: 90%;
+}
+
+#layer-3 {
+    position: absolute;
+    height: 16px;
+    width: 80px;
+    bottom: 36px;
+    left: 5px;
+    background-size: 90%;
+}
+
+#layer-4 {
+    position: absolute;
+    height: 20px;
+    width: 80px;
+    bottom: 45px;
+    left: 5px;
+    background-size: 90%;
+}
+
+#layer--0 {
+    opacity: 100%;
+    position: absolute;
+    height: 16px;
+    width: 80px;
+    bottom: 3px;
+    left: 5px;
+    background-size: 70%;
+}
+
+#layer--1 {
+    position: absolute;
+    opacity: 100%;
+    height: 16px;
+    width: 80px;
+    bottom: 16px;
+    left: 5px;
+    background-size: 80%;
+}
+
+#layer--2 {
+    position: absolute;
+    height: 16px;
+    width: 80px;
+    bottom: 29px;
+    left: 5px;
+    background-size: 90%;
+}
+
+#layer--3 {
+    position: absolute;
+    height: 16px;
+    width: 80px;
+    bottom: 36px;
+    left: 5px;
+    background-size: 90%;
+}
+
+#layer--4 {
+    position: absolute;
+    height: 20px;
+    width: 80px;
+    bottom: 45px;
+    left: 5px;
+    background-size: 90%;
+}
+
+.game-box .bottle {
+    margin: 50px;
+    float: left;
+    height: 100px;
+    width: 50px;
+    bottom: 70px;
+    position: absolute;
+    transform: skewX(35deg);
+}
+
+#ketchup-bottle {
+    background-color: transparent;
+    background-position: center;
+    background-size: 220%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/ketchup_bottle.png);
+    left: 300px;
+    cursor: grab;
+}
+
+#salad-bottle {
+    background-color: transparent;
+    background-position: center;
+    background-size: 220%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/salad_bottle.png);
+    left: 370px;
+    cursor: grab;
+}
+
+.game-box .working-box .cooker {
+    background-color: transparent;
+    position: absolute;
+}
+
+#meat-frying-pan {
+    left: 120px;
+    width: 250px;
+    height: 125px;
+    background-size: 105%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../elements_img/meat_fry_pan.png);
+}
+
+#chips-frying-pot {
+    transform: skewX(20deg);
+    width: 200px;
+    height: 200px;
+    top: -40px;
+    left: -20px;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../elements_img/chip_fry_pot.png);
+}
+
+#chips-frying-pot .frying-chips {
+    background-color: transparent;
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: none;
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    margin: 5px;
+}
+
+#frying-chips-1 {
+    cursor: grab;
+    top: 55px;
+    left: 65px;
+    background-image: url(../elements_img/chips_raw.png);
+}
+
+#frying-chips-1.dragging {
+    cursor: grab;
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#frying-chips-1.fried {
+    background-image: url(../elements_img/chips_fried.png);
+}
+
+#frying-chips-2 {
+    cursor: grab;
+    top: 70px;
+    left: 60px;
+    background-image: url(../elements_img/chips_raw.png);
+}
+
+#frying-chips-2.dragging {
+    cursor: grab;
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#frying-chips-2.fried {
+    background-image: url(../elements_img/chips_fried.png);
+}
+
+#frying-chips-3 {
+    cursor: grab;
+    top: 80px;
+    left: 45px;
+    background-image: url(../elements_img/chips_raw.png);
+}
+
+#frying-chips-3.dragging {
+    cursor: grab;
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#frying-chips-3.fried {
+    background-image: url(../elements_img/chips_fried.png);
+}
+
+#chips-frying-clock {
+    display: none;
+    position: absolute;
+    transform: skewX(35deg);
+    width: 120px;
+    height: 10px;
+    left: -10px;
+    top: -10px;
+    background-color: aliceblue;
+}
+
+#chips-frying-clock .second-block {
+    display: none;
+    position: relative;
+    float: left;
+    background-color: green;
+    margin: 2px;
+    width: 9px;
+    height: 6px;
+}
+
+#frying-chips-button {
+    background-color: transparent;
+    background-image: url(../elements_img/chips_frying_pan_button_off.png);
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 25px;
+    position: absolute;
+    transform: skewX(25deg);
+    bottom: 3px;
+    left: 45px;
+}
+
+#frying-chips-button.disabled {
+    background-color: transparent;
+    background-image: url(../elements_img/chips_frying_pan_button_on.png);
+}
+
+#meat-frying-pan .frying-meat {
+    background-color: transparent;
+    transform: skewX(25deg);
+    width: 75px;
+    height: 45px;
+    position: absolute;
+    margin: 10px;
+}
+
+#meat-frying-pan .meat-clock {
+    position: absolute;
+    transform: skewX(35deg);
+    width: 35px;
+    height: 35px;
+}
+
+#meat-frying-pan .meat-clock .clock-dial {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+#point-0 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 16.5px solid #2e7d32;
+    transform-origin: center bottom;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 0.5s ease, border-bottom-color 0.5s ease;
+}
+
+#point-1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 16.5px solid #2e7d32;
+    transform-origin: center bottom;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 0.5s ease, border-bottom-color 0.5s ease;
+}
+
+#point-2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 16.5px solid #2e7d32;
+    transform-origin: center bottom;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 0.5s ease, border-bottom-color 0.5s ease;
+}
+
+#point-3 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 16.5px solid #2e7d32;
+    transform-origin: center bottom;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 0.5s ease, border-bottom-color 0.5s ease;
+}
+
+#point-4 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 16.5px solid #2e7d32;
+    transform-origin: center bottom;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 0.5s ease, border-bottom-color 0.5s ease;
+}
+
+#meat-frying-pan .meat-clock .clock-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2.4px;
+    height: 2.4px;
+    background: #333;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#meat-frying-pan .frying-meat.fried {
+    transform: skewX(25deg);
+    height: 35px;
+    background-size: 65%;
+    background-image: url(../elements_img/meat_fried.png);
+}
+
+#meat-frying-pan .frying-meat.overfried {
+    transform: skewX(25deg);
+    height: 35px;
+    background-size: 65%;
+    background-image: url(../elements_img/meat_overfried.png);
+}
+
+#meat-0 {
+    display: none;
+    left: 23px;
+    top: 15px;
+    cursor: grab;
+    background-size: cover;
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/meat_raw.png);
+}
+
+#meat-0.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#clock-0 {
+    display: none;
+    top: 0px;
+    left: 35px;
+}
+
+#meat-1 {
+    display: none;
+    right: 23px;
+    top: 15px;
+    cursor: grab;
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/meat_raw.png);
+}
+
+#meat-1.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#clock-1 {
+    display: none;
+    top: 0px;
+    right: 65px;
+}
+
+#meat-2 {
+    display: none;
+    bottom: 8px;
+    left: 10px;
+    cursor: grab;
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/meat_raw.png);
+}
+
+#meat-2.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#clock-2 {
+    display: none;
+    bottom: -5px;
+    left: 53px;
+}
+
+#meat-3 {
+    display: none;
+    cursor: grab;
+    right: 15px;
+    bottom: 8px;
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/meat_raw.png);
+}
+
+#meat-3.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#clock-3 {
+    display: none;
+    bottom: -5px;
+    right: 37px;
+}
+
+#meat-4 {
+    display: none;
+    cursor: grab;
+    left: 75px;
+    bottom: 20px;
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/meat_raw.png);
+}
+
+#meat-4.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#clock-4 {
+    display: none;
+    bottom: 65px;
+    left: 90px;
+}
+
+#working-box-vertical {
+    top: 500px;
+    left: 100px;
+    width: 800px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    background-image: url(../elements_img/desk_vertical.png);
+}
+
+#working-box-vertical .unprocessed-stuff {
+    background-color: transparent;
+    width: 80px;
+    height: 90px;
+    position: absolute;
+}
+
+#working-box-vertical .food-box .unprocessed-stuff.dragging{
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+#unfried-chips {
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/Locked.png);
+    cursor: pointer;
+    left: 200px;
+    top: 10px;
+}
+
+#raw-meat {
+    background-size: cover;
+    background-position: center;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/meat_bag.png);
+    cursor: pointer;
+    left: 200px;
+    top: 100px;
+}
+
+#burger {
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/burger_bag.png);
+    cursor: grab;
+    left: 350px;
+    top: 10px;
+}
+
+#cheese {
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/cheese_icon.png);
+    cursor: grab;
+    left: 500px;
+    top: 10px;
+}
+
+#cabbage {
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../elements_img/cabbage_icon.png);
+    cursor: grab;
+    left: 500px;
+    top: 100px;
+}
+
+#working-box-lateral {
+    background-color: transparent;
+    top: 430px;
+    left: 100px;
+    width: 100px;
+    height: 200px;
+    transform: skewY(-55deg);
+    background-repeat: no-repeat;
+    background-size: 350%;
+    background-position: center;
+    background-image: url(../elements_img/desk_lateral.png);
+}
+
+#working-box-horizontal {
+    position: absolute;
+    background-color: transparent;
+    width: 800px;
+    height: 140px;
+    top: 360px;
+    left: 150px;
+    transform: skewX(145deg);
+    background-repeat: no-repeat;
+    background-size: 190%;
+    background-position: center;
+    background-image: url(../elements_img/desk_horizontal.png);
+}
+
+.game-box .orders-list {
+    position: absolute;
+    background-image: url('../elements_img/order_list_background.png');
+    background-repeat: no-repeat;
+    background-size: 102%;
+    background-position: center;
+    float: left;
+    width: 620px;
+    height: 170px;
+}
+
+.game-box .orders-list .order {
+    position: relative;
+    background-image: url('../elements_img/order_background.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    display: none;
+    float: left;
+    margin: 12px;
+    width: 130px;
+    height: 140px;
+}
+
+.game-box .orders-list .order .order-meal-box {
+    background-color: transparent;
+    position: relative;
+    float: left;
+    top: 10px;
+    margin-left: 5px;
+    width: 50px;
+    height: 60px;
+}
+
+.game-box .orders-list .order.active {
+    display: block;
+    position: relative;
+}
+
+.game-box .orders-list .order.finished {
+    background-image: url('../elements_img/order_finished.png');
+    background-repeat: no-repeat;
+    background-size: 85%;
+    background-position: center;
+}
+
+.game-box .orders-list .order.fail {
+    background-image: url('../elements_img/order_fail.png');
+    background-repeat: no-repeat;
+    background-size: 85%;
+    background-position: center;
+}
+
+.game-box .clock {
+    position: absolute;
+    background-color: transparent;
+    background-image: url(../elements_img/game_total_clock.png);
+    background-repeat: no-repeat;
+    background-size: 85%;
+    background-position: center;
+    width: 150px;
+    height: 120px;
+    right: 0px;
+    color: wheat;
+}
+
+#game-clock-time {
+    position: absolute;
+    top: 42px;
+    right: 40px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 35px;
+    transition: all 0.3s ease;
+}
+
+#game-clock-time.warning {
+    color: #ff4757 !important;
+    animation: shake 0.5s ease infinite;
+}
+
+.game-box .orders-list .order .order-clock-time {
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 25px;
+    transition: all 0.3s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+.game-box .trash-bin {
+    background-color: transparent;
+    background-image: url(../elements_img/trash_bin_close.png);
+    background-repeat: no-repeat;
+    background-size: 110%;
+    background-position: center;
+    position: absolute;
+    width: 100px;
+    height: 150px;
+    bottom: 0;
+}
+
+#trash-bin.open {
+    bottom: 5px;
+    background-size: 105%;
+    background-image: url(../elements_img/trash_bin_open.png);
+}
+
+#Tips {
+    position: absolute;
+    top: 100px;
+    width: 300px;
+    height: 300px;
+}
+
+.money-box {
+    width: 350px;
+    height: 50px;
+    position: absolute;
+    top: 375px;
+    background-color: #015B28;
+    font-size: 25px;
+}
+
+.coin-display-box {
+    position: absolute;
+    left: 200px;
+    top: 20px;
+    width: 150px;
+    height: 50px;
+    background-color: transparent;
+    font-size: 25px;
+    background-image: url(../elements_img/rice-crisp.png);
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: right;
+}
+
+#end-game-box {
+    display: none;
+    background-color: transparent;
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    left: 600px;
+    top: 120px;
+    background-image: url(../elements_img/mini_game_1_endbox.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#end-game-box .end-data {
+    position: absolute;
+    background-color: transparent;
+    width: 150px;
+    height: 50px;
+    font-size: large;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#success-order{
+    top: 165px;
+    left: 120px;
+}
+
+#fail-order{
+    top: 240px;
+    left: 120px;
+}
+
+#earn-money-final{
+    top: 310px;
+    left: 200px;
+}
+
+#end-game-box .back-button {
+    position: absolute;
+    background-color: transparent;
+    width: 160px;
+    height: 60px;
+    left: 110px;
+    bottom: 80px;
+    border-radius: 20%;
+    z-index: 2;
+    cursor: pointer;
+}

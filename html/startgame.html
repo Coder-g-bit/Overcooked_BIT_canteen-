@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overcooked : The Canteen of BIT</title>
+    <link rel="stylesheet" type="text/css" href="..\assets\style\startgame.css">
+</head>
+
+<body>
+    <!-- <div class="topside"></div> -->
+    <div class="middleside">
+        <div class="aboutus">
+            <a class="aboutus" href=" " style="font-size: 30px;"
+                class="aboutus">aboutus</a >
+            <ul class="submenu">
+                <li><a href="..\assets\aboutus-html\lxj.html">林小霁</a ></li>
+                <li><a href="..\assets\aboutus-html\gyz.html">高一之</a ></li>
+                <li><a href="..\assets\aboutus-html\yny.html">余南逸</a ></li>
+                <li><a href="..\assets\aboutus-html\xmq.html">徐曼绮</a ></li>
+                <li><a href="..\assets\aboutus-html\fsy.html">冯书瑶</a ></li>
+            </ul>
+        </div>
+        <h1 class="title">
+            <div class="line1">&nbsp;</div>
+            <div class="line2">&nbsp;</div>
+            <div class="line3">&nbsp;</div>
+            <div class="line4">&nbsp;</div>
+            <div class="line5">&nbsp;</div>
+            <div class="clear"></div>
+        </h1>
+        <div class="register1" id="new_game">
+            <a href="dormitary.html" style="color: black;font-size: 30px;" onclick="InitializeGame()">New game</a >
+        </div>
+        <div class="register" id="continue_game">
+            <a href="archive.html" style="color: black;font-size: 30px;">Continue</a >
+        </div>
+        <div class="register" id="achievements_system">
+            <a href="achievement.html" style="color: black;font-size: 30px;">Achievements</a >
+        </div>
+    </div>
+    <!-- <div class="downside"> -->
+    </div>
+    <script src="../js/recorder.js"></script>
+</body>
+
+</html>
+
+<script>
+    
+    function InitializeGame() {
+        //localStorage.clear();
+    }
+    ObjectManager.ObDel();
+    CoinManager.clearCoin();
+</script>

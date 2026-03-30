@@ -1,0 +1,151 @@
+* {
+    padding: 0%;
+    margin: 0%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+img {
+    vertical-align: top;
+}
+
+i,
+em {
+    font-size: normal;
+}
+
+b,
+strong {
+    font-weight: normal;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+.clear {
+    clear: both;
+}
+
+.topside {
+    background-color: #015B28;
+    width: 1678px;
+    height: 200px;
+    margin-left: -20px;
+    margin-top: -20px;
+    transform: skewY(5deg) translateY(-79px);
+}
+
+.middleside{
+    height:740px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    background-image: url(../elements_img/startgame_background.png);
+}
+
+.middleside>.title>.line1 {
+    margin-top: 50px;
+    font-size: 50px;
+    float: left;
+    color: #015B28;
+    margin-left: 350px;
+}
+
+.middleside>.title>.line3,
+.line5 {
+    margin-top: 70px;
+    float: left;
+    color: #015B28;
+    margin-left: 20px;
+
+}
+
+.middleside>.title>.line2,
+.line4 {
+    margin-top: 70px;
+    float: left;
+    color: #A23A00;
+    margin-left: 20px;
+}
+
+.middleside>.register1 {
+    height: 50px;
+    width: 200px;
+    margin-top: -150px;
+    margin-left: 760px;
+    text-align: center;
+    transition: all 0.6s ease;
+}
+
+.middleside>.register {
+    height: 50px;
+    width: 240px;
+    margin-top: 30px;
+    margin-left: 740px;
+    text-align: center;
+    transition: all 0.6s ease;
+}
+
+.middleside>.register:hover {
+    background-color: #015B28;
+    transform: skewY(6deg);
+}
+
+.middleside>.register1:hover {
+    background-color: #015B28;
+    transform: skewY(6deg);
+}
+
+.middleside>.aboutus {
+    float: left;
+    width: 130px;
+    margin-top: 270px;
+    transition: all 0.6s ease;
+    margin-left: 100px;
+}
+
+.middleside>.aboutus>.us {
+    transition: all 0.6s ease;
+}
+
+.middleside>.aboutus>.us:hover {
+    background-color: #015B28;
+    transform: skewY(6deg);
+}
+
+.middleside>.aboutus>.submenu {
+    margin-top: 10px;
+    transition: all 1s ease;
+    font-size: 25px;
+    opacity: 0;
+}
+
+.middleside>.aboutus>.submenu>li {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.middleside>.aboutus>.submenu>li>a {
+    transition: all 0.6s ease;
+}
+
+.middleside>.aboutus>.submenu>li>a:hover {
+    background-color: #015B28;
+}
+
+.middleside>.aboutus:hover .submenu {
+    opacity: 1;
+}
+
+.downside {
+    background-color: #A23A00;
+    transform: skewY(-6deg) translateY(100px);
+    width: 1659px;
+    height: 200px;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End</title>
+    <script src="../js/audio.js"></script>
+    <script src="../js/save.js"></script>
+    <script src="../js/achievement.js"></script>
+    <style>
+        .dialog-box {
+            width: 500px;
+            height: 250px;
+            font-size: 25px;
+            line-height: 40px;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            background-image: url(../assets/elements_img/show_ach.png);
+        }
+
+        .dialog-box>.img-box {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+            margin: 30px;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+        }
+
+        .dialog-box>.text-box {
+            position: absolute;
+            width: 270px;
+            height: 230px;
+            margin: 10px;
+            right: 0px;
+            background-repeat: no-repeat;
+            background-size: 110%;
+            background-position: center;
+            background-image: url(../assets/elements_img/ach_text.png);
+        }
+
+        #good-dialog {
+            right: 100px;
+            top: 100px;
+        }
+
+        #bad-dialog {
+            left: 100px;
+            top: 100px;
+        }
+
+        #text-dialog {
+            bottom: 100px;
+            left: 500px;
+            line-height: 230px;
+        }
+
+        #text-img {
+            background-image: url(../assets/img/player.png);
+        }
+
+        #good-img {
+            box-shadow: 0 0 15px 5px #f1c40f;
+            background-image: url(../assets/elements_img/student_representive.png);
+        }
+
+        #bad-img {
+            box-shadow: 0 0 15px 5px #f1c40f;
+            background-image: url(../assets/elements_img/headmaster.png);
+        }
+
+        #ending {
+            display: none;
+            width: 500px;
+            height: 500px;
+            z-index: 2;
+            position: absolute;
+            left: 450px;
+            top: 100px;
+            background-repeat: no-repeat;
+            background-size: 110%;
+            background-position: center;
+            background-image: url(../assets/elements_img/ach_text.png);
+            font-size: 25px;
+            line-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dialog-box" id="text-dialog">
+        <div class="img-box" id="text-img"></div>
+        <div class="text-box" id="text-text">该选择鼠呢？(点击头像)</div>
+    </div>
+    <div class="dialog-box" id="good-dialog">
+        <div class="img-box" id="good-img" onclick="GoodEnding()"></div>
+        <div class="text-box" id="good-text">健康不是剥夺选择的借口！食堂垄断难吃又贵，我们需要自由的味道和公平的价格！校长，快醒醒吧</div>
+    </div>
+    <div class="dialog-box" id="bad-dialog">
+        <div class="img-box" id="bad-img" onclick="BadEnding()"></div>
+        <div class="text-box" id="bad-text">《规范》是为了你们的健康与安全！食堂饭菜统一监管，外卖隐患多，必须禁止！你快醒醒吧！</div>
+    </div>
+    <div class="ending-box" id="ending"></div>
+
+    <button id="menuButton" class="menu-button" onclick="toggleMenu()" title="menuButton"></button>
+    <div id="menuPanel" class="menu-panel">
+        <button id="saveButton" onclick="save()"></button>
+        <button id="quitButton" onclick="goHome()"></button>
+        <button id="resumeButton" onclick="toggleMenu()"></button>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+    <link rel="stylesheet" href="../assets/style/menu.css">
+</body>
+
+<script>
+    const EndBox = document.getElementById('ending');
+    function GoodEnding() {
+        if (AchievementManager.getAc()[9] == 0) {
+            AchievementManager.newAc(9);
+        }
+        EndBox.innerText = "鼠鼠的旗帜高高飘扬！崭新的美食街区人声鼎沸，空气中弥漫着自由的香气。白梨工众鼠的胃，终于得到了拯救！这不仅是一场味蕾的胜利，更是选择与自由对僵化规则最酣畅淋漓的逆袭······鼠鼠一觉醒来，发现并没有什么《规定》、什么争吵，原来是自己上美食鉴赏课睡着了！"
+        ending();
+    }
+
+    function BadEnding() {
+        if (AchievementManager.getAc()[8] == 0) {
+            AchievementManager.newAc(8);
+        }
+        EndBox.innerText = "鼠鼠选择了妥协。他从睡梦中醒来之后，喧嚣的厨房重归寂静，外卖APP的光芒彻底熄灭。校园似乎恢复了“秩序”，只是空气中，仿佛永远凝固了一股食堂特色菜那挥之不去的、神秘的味道。斗争的火苗，熄灭了。一切，不过是鼠鼠饿死前的幻想······"
+        ending();
+    }
+
+    function ending() {
+        let VisNum = localStorage.getItem('vis0')+localStorage.getItem('vis1')+localStorage.getItem('vis2')+localStorage.getItem('vis3');
+        console.log(VisNum);
+        if (AchievementManager.getAc()[3] == 0 && VisNum == '1111') {
+            AchievementManager.newAc(3);
+        }
+
+        if (AchievementManager.getAc()[4] == 0 && VisNum == '0000') {
+            AchievementManager.newAc(4);
+        }
+
+        EndBox.style.display = 'block';
+        document.getElementById('good-dialog').style.display = 'none';
+        document.getElementById('bad-dialog').style.display = 'none';
+        document.getElementById('text-dialog').style.display = 'none';
+        setTimeout(function () { window.location.href = 'startgame.html'; }, 10000);
+    }
+
+</script>

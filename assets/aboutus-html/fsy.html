@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冯书瑶 - AI开发者 & 游戏设计师</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            color: #333;
+            background: linear-gradient(135deg, rgba(35, 45, 62, 0.85) 0%, rgba(57, 85, 114, 0.85) 100%), 
+                       url(/assets/style/img/4.png) no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+        
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+            z-index: -1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ff9e44;
+            transition: all 0.3s;
+        }
+
+        .header {
+            padding: 40px 0 30px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: rgba(255, 227, 185, 0.95);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 8px rgba(226, 255, 96, 0.6));
+        }
+        
+        .header .title-deco {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.3rem;
+            color: #b1e3fd;
+            font-weight: 300;
+            position: relative;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .header .title-deco:before, .header .title-deco:after {
+            content: "◆";
+            color: #ffa755;
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 1.4rem;
+            vertical-align: middle;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .profile-image {
+            flex: 0 0 320px;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 235, 205, 0.85);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 0 8px rgba(255, 199, 117, 0.5);
+        }
+        
+        .role-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(to right, rgba(35, 45, 62, 0.9), rgba(57, 85, 114, 0.9));
+            color: #ffd8a9;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.15rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 248, 248, 0.94) 100%);
+            border-radius: 18px;
+            padding: 40px 35px 35px;
+            margin-top: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+        
+        .main-content:hover {
+            transform: translateY(-7px);
+        }
+        
+        .main-content:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9e44, #ffd8a9, #ffa755);
+        }
+
+        .subsection {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #232d3f;
+            margin: 20px 0 25px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffa755, #ffca7b);
+            border-radius: 4px;
+        }
+
+        .bio-content {
+            color: #444;
+            font-size: 1.15rem;
+            line-height: 1.85;
+            text-align: justify;
+        }
+        
+        .design-highlight {
+            background: linear-gradient(to right, #ffecd7, #ffd7a8);
+            padding: 22px 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .design-highlight h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .design-highlight h3 i {
+            margin-right: 15px;
+            color: #ff9e44;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
+        }
+        
+        .skill-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid #ffb96d;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .skill-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #232d3f;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-card h4 i {
+            margin-right: 15px;
+            color: #ff9e44;
+            font-size: 1.5rem;
+        }
+        
+        .skill-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .pill-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0 35px;
+            justify-content: center;
+        }
+
+        .pill {
+            background: rgba(35, 45, 62, 0.8);
+            color: #fffbe0;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pill:hover {
+            background: linear-gradient(to right, #ff9e44, #ffba76);
+            transform: scale(1.05);
+            color: #2c2c2c;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pill i {
+            margin-right: 10px;
+        }
+
+        .mulu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            padding: 15px 0;
+            margin-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .mulu a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(35, 45, 62, 0.9);
+            color: #ffd8a9;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            gap: 10px;
+        }
+        
+        .mulu a:hover {
+            background: linear-gradient(to right, #ff9e44, #ffc58c);
+            color: #2c2c2c;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+        
+        .mulu a i {
+            font-size: 1.2rem;
+        }
+
+        .quote-mark {
+            position: absolute;
+            font-family: Georgia, serif;
+            font-size: 5rem;
+            color: rgba(255, 168, 76, 0.15);
+            z-index: 0;
+        }
+
+        .open-quote {
+            top: -10px;
+            left: 15px;
+        }
+
+        .close-quote {
+            bottom: -35px;
+            right: 15px;
+        }
+
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            margin-top: 30px;
+        }
+        
+        .footer:before {
+            content: "";
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 235, 205, 0.6), transparent);
+            margin: 0 auto 25px;
+            width: 45%;
+        }
+        @media (max-width: 868px) {
+            .header h1 {
+                font-size: 3.2rem;
+            }
+            
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .profile-image {
+                flex: 0 0 auto;
+                max-width: 280px;
+                margin-top: 0;
+            }
+            
+            .main-content {
+                margin-top: 0;
+                padding: 25px;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.4rem;
+            }
+            
+            .header .title-deco {
+                font-size: 1rem;
+            }
+            
+            .header .title-deco:before, 
+            .header .title-deco:after {
+                margin: 0 8px;
+                font-size: 1rem;
+            }
+            
+            .mulu {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .mulu a {
+                width: 100%;
+            }
+        }
+        
+        @keyframes entry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated-entry {
+            animation: entry 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <div class="header animated-entry">
+        <h1>冯书瑶</h1>
+        <p class="title-deco">人工智能&税收 · 跨领域设计师</p>
+    </div>
+    
+    <div class="container">
+        <div class="profile-image animated-entry delay-1">
+            <div class="role-badge">UI设计师 · 开发者</div>
+            <img src="../img/fsy.jpg" alt="冯书瑶">
+        </div>
+        
+        <div class="main-content animated-entry delay-2">
+            <div class="subsection">
+                <h2 class="section-title">跨界探索者</h2>
+                <div class="bio-content">
+                    <p>我是冯书瑶，2024级人工智能+税收专业的学生。</p>
+                    
+                    <div class="design-highlight" style="position: relative;">
+                        <span class="quote-mark open-quote">“</span>
+                        <span class="quote-mark close-quote">”</span>
+                        <h3><i class="fas fa-cogs"></i>从经济学理性走向AI浪漫</h3>
+                        <p>我坚信技术不仅关乎算法与逻辑，更承载着情感与创意。我带着经济学的严谨，怀抱对人工智能的热情，渴望在技术理性与美学表达间架起桥梁。</p>
+                    </div>
+                    
+                    <p>作为一名资深'食堂美食家'兼厨房游戏爱好者，我希望将天马行空的创意扎实落地，把我们对美食的热爱转化为人人乐享的游戏体验。</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h2 class="section-title">能力与贡献</h2>
+                <div class="skills-container">
+                    <div class="skill-card animated-entry delay-2">
+                        <h4><i class="fas fa-paint-brush"></i>视觉设计能力</h4>
+                        <p>主导游戏的UI设计与介绍视频剪辑，确保视觉风格统一且富有感染力。用精心设计的界面为用户创造无缝愉悦的游戏体验。</p>
+                    </div>
+                    
+                    <div class="skill-card animated-entry delay-3">
+                        <h4><i class="fas fa-laptop-code"></i>技术理解力</h4>
+                        <p>具备C/Python基础及快速学习能力，高效理解程序逻辑，在设计与开发间担任创意转换器的角色，确保设计与功能的完美匹配。</p>
+                    </div>
+                    
+                    <div class="skill-card animated-entry delay-4">
+                        <h4><i class="fas fa-user-friends"></i>团队协作力</h4>
+                        <p>以细致入微的观察力打磨界面细节与用户体验，擅长将复杂设计拆解为可执行任务，在协作中实现从概念到产品的完美转化。</p>
+                    </div>
+                </div>
+                
+                <div class="design-highlight">
+                    <h3><i class="fas fa-bullseye"></i>关键目标——细节成就完美</h3>
+                    <p>超出预期的设计从50个细节开始：精确到像素的图标排列、惊喜的动效彩蛋、恰到好处的点击反馈……我们将精益求精进行到底。</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h2 class="section-title">项目目标</h2>
+                <div class="pill-section">
+                    <div class="pill animated-entry delay-2"><i class="fas fa-rocket"></i>实践驱动突破</div>
+                    <div class="pill animated-entry delay-3"><i class="fas fa-users"></i>团队协作成长</div>
+                    <div class="pill animated-entry delay-4"><i class="fas fa-laugh"></i>传递纯粹乐趣</div>
+                    <div class="pill animated-entry delay-5"><i class="fas fa-cogs"></i>创新体验融合</div>
+                </div>
+                
+                <div class="design-highlight">
+                    <h3><i class="fas fa-star"></i>我们的成功标准</h3>
+                    <p>实现作品完成度80%的里程碑，同时让每一位玩家在测试时眼角含笑——因意外翻车而笑，因默契配合而笑，因惊喜设计而会心一笑。这抹笑容就是我们最大的骄傲。</p>
+                </div>
+            </div>
+            
+            <div class="mulu">
+                <a href="yny.html" class="animated-entry delay-3">
+                    <i class="fas fa-arrow-left"></i>余南逸
+                </a>
+                <a href="aboutus.html" class="animated-entry delay-4">
+                    <i class="fas fa-home"></i>返回首页
+                </a>
+                <a href="xmq.html" class="animated-entry delay-5">
+                    <i class="fas fa-arrow-right"></i>徐曼绮
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2025 下一组团队 | 逻辑之美 × 艺术之魂
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileImg = document.querySelector('.profile-image img');
+            profileImg.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.03)';
+            });
+            
+            profileImg.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.45)';
+            });
+            const skillCards = document.querySelectorAll('.skill-card');
+            skillCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+            document.body.style.opacity = 0;
+            setTimeout(function() {
+                document.body.style.transition = 'opacity 1s ease-in';
+                document.body.style.opacity = 1;
+            }, 100);
+        });
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.animated-entry');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight * 0.85) {
+                    el.style.opacity = 1;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

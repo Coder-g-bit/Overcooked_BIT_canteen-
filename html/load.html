@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive</title>
+    <style>
+        body {
+            background-image: url(OldDungeon.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .p1 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .p1 button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #007bff;
+            background-color: #292216;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .p1 button:hover {
+            background-color: #0056b3;
+            background-color: #5a4a2f;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            margin-top: 5px;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 style="text-align: center;">Save</h2>
+
+        <!-- 生成5个存档器 -->
+        <div class="p1">
+            <button class="save-slot" onclick="saveSlot(1)" id="slot-1">Slot1</button>
+            <button class="delete-button" onclick="deleteSlot(1)">Delete Slot1</button>
+        </div>
+        <div class="p1">
+            <button class="save-slot" onclick="saveSlot(2)" id="slot-2">Slot2</button>
+            <button class="delete-button" onclick="deleteSlot(2)">Delete Slot2</button>
+        </div>
+        <div class="p1">
+            <button class="save-slot" onclick="saveSlot(3)" id="slot-3">Slot3</button>
+            <button class="delete-button" onclick="deleteSlot(3)">Delete Slot3</button>
+        </div>
+        <div class="p1">
+            <button class="save-slot" onclick="saveSlot(4)" id="slot-4">Slot4</button>
+            <button class="delete-button" onclick="deleteSlot(4)">Delete Slot4</button>
+        </div>
+        <div class="p1">
+            <button class="save-slot" onclick="saveSlot(5)" id="slot-5">Slot5</button>
+            <button class="delete-button" onclick="deleteSlot(5)">Delete Slot5</button>
+        </div>
+        <div class="p1">
+            <button class="delete-button" onclick="goHome()">Back</button>
+        </div>
+
+    </div>
+    <script src="..\js\saving.js"></script>
+    <script>
+        // 获取当前用户的ID
+        const currentUserId = localStorage.getItem('currentUser');
+
+        function initializeSlots() {
+            for (let i = 1; i <= 5; i++) {
+                const saveTime = localStorage.getItem(`${currentUserId}_saveSlot${i}`);
+                if (saveTime) {
+                    document.getElementById(`slot-${i}`).innerText = `Slot${i}: ${saveTime}`;
+                } else {
+                    document.getElementById(`slot-${i}`).innerText = `Slot${i}(Empty)`;
+                }
+            }
+        }
+
+        function saveSlot(slotNumber) {
+            const saveTime = new Date().toLocaleString();
+            localStorage.setItem(`${currentUserId}_saveSlot${slotNumber}`, saveTime);
+            localStorage.setItem(`${currentUserId}_tempurl${slotNumber}`, localStorage.getItem('tempurl'));
+            SaveManager.getSave(currentUserId, slotNumber);
+            alert("存档成功！");
+            window.location.href = localStorage.getItem('tempurl');
+        }
+
+        function deleteSlot(slotNumber) {
+            localStorage.removeItem(`${currentUserId}_saveSlot${slotNumber}`);
+            localStorage.removeItem(`${currentUserId}_tempurl${slotNumber}`);
+            document.getElementById(`slot-${slotNumber}`).innerText = `Slot${slotNumber}(Empty)`;
+            alert("删除成功！");
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeSlots);
+
+    </script>
+    <script src="..\js\save.js"></script>
+</body>
+
+</html>

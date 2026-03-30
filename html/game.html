@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overcooked : The Canteen of BIT</title>
+    <link rel="stylesheet" href="..\assets\style\game.css">
+    <link rel="stylesheet" href="../assets/style/store.css">
+    <script src="../js/save.js"></script>
+</head>
+
+<body>
+    <div class="game-container" style="position: fixed;">
+        <div class="dormitary-box" id="dormitary"></div><!-- new -->
+        <div class="canteen-east-box" id="canteen-east">
+            <div class="door" id="enter-east-canteen-door"></div>
+        </div>
+        <div class="choose-button" id="enter-east-canteen">
+            <p style="font-size: 20px;text-align: center;line-height: 50px;top: 50px;left: 50px;position: absolute;">Are you ready to<br>enter the East Canteen</p>
+            <button class="choice-button" id="enter-choice" style="width: 150px;height: 30px;position: absolute;top: 170px;left: 80px;" onclick="enter_canteen_east()">YES</button>
+            <button class="choice-button" id="cancel-choice" onclick="Hide('enter-east-canteen')" style="width: 150px;height: 30px;position: absolute;bottom: 60px;left: 80px;">NO</button>
+        </div>
+        <div class="canteen-north-box" id="canteen-north">
+            <div class="door" id="enter-north-canteen-door"></div>
+        </div>
+        <div class="choose-button" id="enter-north-canteen">
+            <p style="font-size: 20px;text-align: center;line-height: 50px;top: 50px;left: 50px;position: absolute;">Are you ready to<br>enter the North Canteen</p>
+            <button class="choice-button" id="enter-choice" style="width: 150px;height: 30px;position: absolute;top: 170px;left: 80px;" onclick="enter_canteen_north()">YES</button>
+            <button class="choice-button" id="cancel-choice" onclick="Hide('enter-north-canteen')" style="width: 150px;height: 30px;position: absolute;bottom: 60px;left: 80px;">NO</button>
+        </div>
+
+        <div class="ending-game-box" id="ending-game"></div>
+
+        <div class="npc-box" id="npc"></div>
+        <div class="dialog-box" id="dialog">!@#$%^&</div>
+        
+        <div class="player" id="Player"></div>
+    </div>
+    <audio src="../assets/MP3/walking.mp3" id="walking-sound"></audio>
+    <audio src="../assets/MP3/open_door.mp3" id="door-open-sound"></audio>
+    <audio src="../assets/MP3/game_bgm.mp3" id="game_bgm"></audio>
+    <div class="status-box">
+        <div class="money"></div>
+        <div class="backpack"></div>
+    </div>
+
+    <button id="menuButton" class="menu-button" onclick="toggleMenu()" title="menuButton"></button>
+    <div id="menuPanel" class="menu-panel">
+        <button id="saveButton" onclick="save()"></button>
+        <button id="quitButton" onclick="goHome()"></button>
+        <button id="resumeButton" onclick="toggleMenu()"></button>
+    </div>
+    <canvas id="inventory"></canvas>
+    <script src="../js/inventory.js"></script>
+    <div id="overlay" class="overlay"></div>
+    <link rel="stylesheet" href="../assets/style/menu.css">
+</body>
+
+</html>
+
+<script src="../js/game.js"></script>

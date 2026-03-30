@@ -1,0 +1,80 @@
+.menu-button {
+    position: absolute;
+    cursor: pointer;
+    background-color: transparent;
+    border: transparent;
+    top: 10px;
+    left: 10px;
+    width: 70px;
+    height: 70px;
+    background-image: url(../elements_img/menu_button.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+.menu-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    width: 250px;
+    height: 300px;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 3;
+    background-image: url(../elements_img/menu_panel.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+.menu-panel button {
+    padding: 10px 36px;
+    text-decoration: none;
+    display: block;
+    background-color: transparent;
+    background-position: center center;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    position: relative;
+    top: 80px;
+    left: 70px;
+    margin-bottom: 20px;
+    background-repeat: no-repeat;
+    background-size: 110%;
+    background-position: center;
+}
+
+.menu-panel button:last-child {
+    margin-bottom: 0;
+}
+
+#saveButton{
+    background-image: url(../elements_img/save_button.png);
+}
+
+#quitButton{
+    background-image: url(../elements_img/quit_button.png);
+}
+
+#resumeButton{
+    background-image: url(../elements_img/resume_button.png);
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive</title>
+    <style>
+        body {
+            background-image: url(OldDungeon.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .p1 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .p1 button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #007bff;
+            background-color: #292216;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .p1 button:hover {
+            background-color: #0056b3;
+            background-color: #5a4a2f;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            margin-top: 5px;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 style="text-align: center;">Load</h2>
+
+        <!-- 生成5个读档器 -->
+        <div class="p1">
+            <button class="load-slot" onclick="loadSlot(1)" id="slot-1">Slot1</button>
+            <button class="delete-button" onclick="deleteSlot(1)">Delete Slot1</button>
+        </div>
+        <div class="p1">
+            <button class="load-slot" onclick="loadSlot(2)" id="slot-2">Slot2</button>
+            <button class="delete-button" onclick="deleteSlot(2)">Delete Slot2</button>
+        </div>
+        <div class="p1">
+            <button class="load-slot" onclick="loadSlot(3)" id="slot-3">Slot3</button>
+            <button class="delete-button" onclick="deleteSlot(3)">Delete Slot3</button>
+        </div>
+        <div class="p1">
+            <button class="load-slot" onclick="loadSlot(4)" id="slot-4">Slot4</button>
+            <button class="delete-button" onclick="deleteSlot(4)">Delete Slot4</button>
+        </div>
+        <div class="p1">
+            <button class="load-slot" onclick="loadSlot(5)" id="slot-5">Slot5</button>
+            <button class="delete-button" onclick="deleteSlot(5)">Delete Slot5</button>
+        </div>
+        <div class="p1">
+            <a href="startgame.html"> <button class="load-slot" id="slot-6">Back</button></a>
+        </div>
+    </div>
+
+    <script src="..\js\recorder.js"></script>
+    <script src="..\js\saving.js"></script>
+    <script src="..\js\game.js"></script>
+    <script>
+
+        // 获取当前用户的ID
+        const currentUserId = localStorage.getItem('currentUser');
+
+        function initializeSlots() {
+            for (let i = 1; i <= 5; i++) {
+                const saveTime = localStorage.getItem(`${currentUserId}_saveSlot${i}`);
+                if (saveTime) {
+                    document.getElementById(`slot-${i}`).innerText = `Slot${i}: ${saveTime}`;
+                } else {
+                    document.getElementById(`slot-${i}`).innerText = `Slot${i}(empty)`;
+                }
+            }
+        }
+
+        function loadSlot(slotNumber) {
+            const savedUrl = localStorage.getItem(`${currentUserId}_tempurl${slotNumber}`);
+            if (savedUrl) {
+                const everything = SaveManager.Load(currentUserId, slotNumber);
+                console.log(everything);
+                console.log(everything[0]);
+                if (everything[0] != null)
+                    ObjectManager.ReObject(everything[0]);
+                CoinManager.clearCoin();
+                CoinManager.addCoin(everything[1]);
+                console.log(ObjectManager.getObject());
+                console.log(CoinManager.getCoin());
+                alert(`Read Slot${slotNumber} successfully!`);
+                window.location.href = savedUrl;
+            } else {
+                alert(`Slot${slotNumber}is Empty,fali to access!`);
+            }
+        }
+
+        function deleteSlot(slotNumber) {
+            localStorage.removeItem(`${currentUserId}_saveSlot${slotNumber}`);
+            localStorage.removeItem(`${currentUserId}_tempurl${slotNumber}`);
+            document.getElementById(`slot-${slotNumber}`).innerText = `Slot${slotNumber}(empty)`;
+            alert("Delete Successfully!");
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeSlots);
+
+    </script>
+    <script src="..\js\save.js"></script>
+</body>
+
+</html>

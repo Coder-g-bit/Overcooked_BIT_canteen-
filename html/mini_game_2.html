@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game-Overcooked</title>
+    <link rel="stylesheet" href="../assets/style/menu.css">
+    <link rel="stylesheet" href="../assets/style/store.css">
+    <script src="../js/save.js"></script>
+    <script src="../js/achievement.js"></script>
+    <style>
+        body{
+            background-color: wheat;
+        }
+
+        .game-box {
+            position: fixed;
+            width: 1000px;
+            height: 700px;
+            background-color: transparent;
+            background-image: url(../assets/elements_img/mini_game_2_background.png);
+            background-position: center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            top: 10px;
+            left: 400px;
+        }
+
+        *.highlight {
+            box-shadow: 0 0 15px 5px #f1c40f;
+            z-index: 1;
+        }
+
+        .game-box>.table-box {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/desk.png);
+            position: absolute;
+        }
+
+        #clean-tray-0 {
+            width: 70px;
+            height: 70px;
+            margin: 15px;
+            border-radius: 100%;
+            background-color: transparent;
+            position: absolute;
+            z-index: 1;
+            background-image: url(../assets/elements_img/clean_tray.png);
+            background-repeat: no-repeat;
+            background-size: 108%;
+            background-position: center;
+        }
+
+        #clean-tray-0.dirty {
+            background-image: url(../assets/elements_img/dirty_tray.png);
+        }
+
+        #clean-tray-1 {
+            width: 70px;
+            height: 70px;
+            margin: 15px;
+            border-radius: 100%;
+            background-color: transparent;
+            position: absolute;
+            z-index: 1;
+            background-image: url(../assets/elements_img/clean_tray.png);
+            background-repeat: no-repeat;
+            background-size: 108%;
+            background-position: center;
+        }
+
+        #clean-tray-1.dirty {
+            background-image: url(../assets/elements_img/dirty_tray.png);
+        }
+
+        .game-box>.table-box>.block-box {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        #table-up {
+            width: 1000px;
+            height: 100px;
+        }
+
+        #table-up>.block-box {
+            float: left;
+        }
+
+        #table-up>.ingredient-box {
+            background-color: transparent;
+            width: 100px;
+            height: 100px;
+            float: left;
+            position: relative;
+        }
+
+        #cabbage-box{
+            background-size: 120%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/cabbage_box.png);
+        }
+
+        #cabbage {
+            width: 60px;
+            height: 60px;
+            background-color: transparent;
+            position: absolute;
+            margin: 10px;
+            background-image: url(../assets/elements_img/total_cabbage.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+        }
+
+        #cabbage.smashed {
+            width: 80px;
+            height: 80px;
+            background-image: url(../assets/elements_img/smashed_cabbage.png);
+            background-size: 100%;
+        }
+
+        #tomato-box{
+            background-size: 116%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/tomato_box.png);
+        }
+
+        #tomato {
+            width: 60px;
+            height: 60px;
+            background-color: transparent;
+            position: absolute;
+            margin: 20px;
+            margin-top: 10px;
+            background-image: url(../assets/elements_img/total_tomato.png);
+            background-repeat: no-repeat;
+            background-size: 110%;
+            background-position: center;
+        }
+
+        #tomato.smashed {
+            width: 80px;
+            height: 80px;
+            background-image: url(../assets/elements_img/smashed_tomato.png);
+            background-size: 110%;
+        }
+
+        #table-left {
+            top: 100px;
+            width: 100px;
+            height: 600px;
+        }
+
+        #sink {
+            width: 100px;
+            height: 200px;
+            position: relative;
+        }
+
+        #wash-dirty-tray {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/sink.png);
+            width: 100px;
+            height: 100px;
+        }
+
+        #store-clean-tray {
+            background-color: transparent;
+            width: 100px;
+            height: 100px;
+        }
+
+        #table-right {
+            top: 100px;
+            right: 0;
+            width: 100px;
+            height: 600px;
+        }
+
+        #out-meal {
+            width: 100px;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/out_meal_background.png);
+        }
+
+        #Progress {
+            position: absolute;
+            display: none;
+            top: 10px;
+            left: 10px;
+            width: 10px;
+            height: 80px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        #Progress-bar {
+            width: 100%;
+            height: 0%;
+            position: absolute;
+            bottom: 0;
+            background-color: #4CAF50;
+            transition: height 0.3s ease;
+        }
+
+        #store-dirty-tray {
+            background-size: 120%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/store_dirty_tray.png);
+            width: 100px;
+            height: 100px;
+        }
+
+        #table-bottom {
+            bottom: 0;
+            left: 100px;
+            width: 800px;
+            height: 100px;
+        }
+
+        #table-bottom>.block-box {
+            float: left;
+        }
+
+        #table-bottom>.cut-food-box {
+            background-size: 105%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/cut_box.png);
+            width: 100px;
+            height: 100px;
+            position: relative;
+            float: left;
+        }
+
+        #progress {
+            position: absolute;
+            display: none;
+            left: 410px;
+            top: 80px;
+            width: 80px;
+            height: 10px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.3s ease;
+        }
+
+        #player {
+            position: absolute;
+            background-color: yellow;
+        }
+
+        #player-body {
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/img/player.png);
+            width: 100px;
+            height: 100px;
+            transition: transform 0.2s ease;
+            border-radius: 100%;
+            position: absolute;
+        }
+
+        #player-hand {
+            background-size: 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/elements_img/player_hand.png);
+            top: 70px;
+            width: 100px;
+            height: 50px;
+            position: absolute;
+        }
+
+        #order-list {
+            width: 350px;
+            height: 160px;
+            position: absolute;
+            background-image: url('../assets/elements_img/order_list_background.png');
+            background-repeat: no-repeat;
+            background-size: 150%;
+            background-position: center;
+            position: absolute;
+            left: -70px;
+            top: -10px;
+            opacity: 0.7;
+            z-index: 2;
+        }
+
+        #order-list>.order-box {
+            display: none;
+            width: 80px;
+            height: 120px;
+            position: relative;
+            float: left;
+            margin: 18px;
+            background-image: url('../assets/elements_img/order_background.png');
+            background-repeat: no-repeat;
+            background-size: 150%;
+            background-position: center;
+        }
+
+        #order-list>.order-box.finished{
+            background-image: url(../assets/elements_img/order_finished.png);
+            background-repeat: no-repeat;
+            background-size: 85%;
+            background-position: center;
+        }
+
+        #order-list>.order-box.fail{
+            background-image: url(../assets/elements_img/order_fail.png);
+            background-repeat: no-repeat;
+            background-size: 85%;
+            background-position: center;
+        }
+
+        #progress-0 {
+            position: absolute;
+            top: 10px;
+            right: -15px;
+            width: 10px;
+            height: 80px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+        }
+
+        #progress-bar-0 {
+            width: 100%;
+            height: 0%;
+            position: absolute;
+            bottom: 0;
+            background-color: #4CAF50;
+            transition: height 0.2s ease;
+        }
+
+        #progress-1 {
+            position: absolute;
+            top: 10px;
+            right: -15px;
+            width: 10px;
+            height: 80px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+        }
+
+        #progress-bar-1 {
+            width: 100%;
+            height: 0%;
+            position: absolute;
+            bottom: 0;
+            background-color: #4CAF50;
+            transition: height 0.2s ease;
+        }
+
+        #progress-2 {
+            position: absolute;
+            top: 10px;
+            right: -15px;
+            width: 10px;
+            height: 80px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+        }
+
+        #progress-bar-2 {
+            width: 100%;
+            height: 0%;
+            position: absolute;
+            bottom: 0;
+            background-color: #4CAF50;
+            transition: height 0.2s ease;
+        }
+
+        .coin-display-box {
+            position: absolute;
+            left: 150px;
+            top: 20px;
+            width: 150px;
+            height: 50px;
+            background-color: transparent;
+            font-size: 25px;
+            background-image: url(../assets/elements_img/rice-crisp.png);
+            background-repeat: no-repeat;
+            background-size: 40%;
+            background-position: right;
+        }
+
+        .game-box .clock {
+            position: absolute;
+            background-color: transparent;
+            background-image: url(../assets/elements_img/game_total_clock.png);
+            background-repeat: no-repeat;
+            background-size: 85%;
+            background-position: center;
+            width: 150px;
+            height: 120px;
+            right: 0px;
+            color: wheat;
+        }
+
+        #game-clock-time {
+            position: absolute;
+            top: 42px;
+            right: 40px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 35px;
+            transition: all 0.3s ease;
+        }
+
+        #game-clock-time.warning {
+            color: #ff4757 !important;
+            animation: shake 0.5s ease infinite;
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+        }
+
+        #end-game-box {
+            display: none;
+            background-color: transparent;
+            width: 400px;
+            height: 500px;
+            position: absolute;
+            left: 600px;
+            top: 120px;
+            background-image: url(../assets/elements_img/mini_game_1_endbox.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        #end-game-box .end-data {
+            position: absolute;
+            background-color: transparent;
+            width: 150px;
+            height: 50px;
+            font-size: large;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        #success-order{
+            top: 165px;
+            left: 120px;
+        }
+
+        #fail-order{
+            top: 240px;
+            left: 120px;
+        }
+
+        #earn-money-final{
+            top: 310px;
+            left: 200px;
+        }
+
+        #end-game-box .back-button {
+            position: absolute;
+            background-color: transparent;
+            width: 160px;
+            height: 60px;
+            left: 110px;
+            bottom: 80px;
+            border-radius: 20%;
+            z-index: 2;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-box">
+        <div class="table-box" id="table-up">
+            <div class="block-box" id="block-21"></div>
+            <div class="block-box" id="block-0"></div>
+            <div class="block-box" id="block-1"></div>
+            <div class="ingredient-box" id="tomato-box"></div>
+            <div class="block-box" id="block-2"></div>
+            <div class="block-box" id="block-3"></div>
+            <div class="ingredient-box" id="cabbage-box"></div>
+            <div class="block-box" id="block-4"></div>
+            <div class="block-box" id="block-5"></div>
+            <div class="block-box" id="block-6"></div>
+        </div>
+        <div class="table-box" id="table-left">
+            <div class="block-box" id="block-7"></div>
+            <div class="sink-box" id="sink">
+                <div class="wash-dirty-tray-box" id="wash-dirty-tray"></div>
+                <div class="Progress-box" id="Progress">
+                    <div class="Progress-bar-box" id="Progress-bar"></div>
+                </div>
+                <div class="store-clean-tray-box" id="store-clean-tray"></div>
+            </div>
+            <div class="block-box" id="block-8"></div>
+            <div class="block-box" id="block-9"></div>
+            <div class="block-box" id="block-10"></div>
+        </div>
+        <div class="table-box" id="table-right">
+            <div class="block-box" id="block-11"><div class="clean-tray-box" id="clean-tray-0"></div></div>
+            <div class="out-meal-box" id="out-meal"></div>
+            <!-- 引导 -->
+            <div class="store-dirty-tray-box" id="store-dirty-tray"></div>
+            <div class="block-box" id="block-12"><div class="clean-tray-box" id="clean-tray-1"></div></div>
+            <div class="block-box" id="block-13"></div>
+        </div>
+        <div class="table-box" id="table-bottom">
+            <div class="block-box" id="block-14"></div>
+            <div class="block-box" id="block-15"></div>
+            <div class="block-box" id="block-16"></div>
+            <div class="block-box" id="block-17"></div>
+            <div class="cut-food-box" id="cut-food"></div>
+            <div class="progress-box" id="progress">
+                <div class="progress-bar-box" id="progress-bar"></div>
+            </div>
+            <div class="block-box" id="block-18"></div>
+            <div class="block-box" id="block-19"></div>
+            <div class="block-box" id="block-20"></div>
+        </div>
+        <div class="player-box" id="player">
+            <div class="player-body-box" id="player-body"></div>
+            <div class="player-hand-box" id="player-hand"></div>
+        </div>
+        <div class="order-list-box" id="order-list">
+            <div class="order-box" id="order-0"></div>
+            <div class="order-box" id="order-1"></div>
+            <div class="order-box" id="order-2"></div>
+        </div>
+        <div class="clock">
+            <div class="clock-time" id="game-clock-time">03:00</div>
+        </div>
+        
+    </div>
+    <div class="tips-box" id="tips" style="position: absolute;top: 200px;font-size: 20px;line-height: 40px;">0.press 'Space' to pick up/put down<br>1.press 'x' to cut food/wash dishes<br>2.More SALAD!More!!!</div>
+    <div class="coin-display-box" id="coin-display">Earn 0</div>
+    <canvas id="inventory"></canvas>
+    <script src="../js/inventory.js"></script>
+    <button id="menuButton" class="menu-button" onclick="toggleMenu()" title="menuButton"></button>
+    <div id="menuPanel" class="menu-panel">
+        <button id="saveButton" onclick="save()"></button>
+        <button id="quitButton" onclick="goHome()"></button>
+        <button id="resumeButton" onclick="toggleMenu()"></button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+    <div class="end-game-box" id="end-game-box">
+        <div id="success-order" class="end-data"></div>
+        <div id="fail-order" class="end-data"></div>
+        <div id="earn-money-final" class="end-data"></div>
+        <div class="back-button" onclick="EndGame()"></div>
+    </div>
+    <script src="../js/audio.js"></script>
+    <audio src="../assets/MP3/cut_food.mp3" id="cut_food"></audio>
+    <audio src="../assets/MP3/order_fail.mp3" id="order_fail"></audio>
+    <audio src="../assets/MP3/order_success.mp3" id="order_success"></audio>
+    <audio src="../assets/MP3/put_down.mp3" id="put_down"></audio>
+    <audio src="../assets/MP3/pick_up.mp3" id="pick_up"></audio>
+    <audio src="../assets/MP3/wash_tray.mp3" id="wash_tray"></audio>
+    <audio src="../assets/MP3/end_game.mp3" id="end_game"></audio>
+    <audio src="../assets/MP3/walking.mp3" id="walking"></audio>
+    <audio src="../assets/MP3/minigame_bgm.mp3" id="minigame_bgm"></audio>
+</body>
+
+</html>
+<script>
+    const keys = {};
+    const obstacles = [{ block: document.getElementById('block-21'), x: 0, y: 0, id: 'block-21' }, { block: document.getElementById('block-0'), x: 100, y: 0, id: 'block-0' }, { block: document.getElementById('block-1'), x: 200, y: 0, id: 'block-1' }, { block: document.getElementById('tomato-box'), x: 300, y: 0, id: 'tomato-box' }, { block: document.getElementById('block-2'), x: 400, y: 0, id: 'block-2' }, { block: document.getElementById('block-3'), x: 500, y: 0, id: 'block-3' }, { block: document.getElementById('cabbage-box'), x: 600, y: 0, id: 'cabbage-box' }, { block: document.getElementById('block-4'), x: 700, y: 0, id: 'block-4' }, { block: document.getElementById('block-5'), x: 800, y: 0, id: 'block-5' }, { block: document.getElementById('block-6'), x: 900, y: 0, id: 'block-6' }, { block: document.getElementById('block-7'), x: 0, y: 100, id: 'block-7' }, { block: document.getElementById('wash-dirty-tray'), x: 0, y: 200, id: 'wash-dirty-tray' }, { block: document.getElementById('store-clean-tray'), x: 0, y: 300, id: 'store-clean-tray' }, { block: document.getElementById('block-8'), x: 0, y: 400, id: 'block-8' }, { block: document.getElementById('block-9'), x: 0, y: 500, id: 'block-9' }, { block: document.getElementById('block-10'), x: 0, y: 600, id: 'block-10' }, { block: document.getElementById('block-11'), x: 900, y: 100, id: 'block-11' }, { block: document.getElementById('out-meal'), x: 900, y: 200, id: 'out-meal' }, { block: document.getElementById('store-dirty-tray'), x: 900, y: 400, id: 'store-dirty-tray' }, { block: document.getElementById('block-12'), x: 900, y: 500, id: 'block-12' }, { block: document.getElementById('block-13'), x: 900, y: 600, id: 'block-13' }, { block: document.getElementById('block-14'), x: 100, y: 600, id: 'block-14' }, { block: document.getElementById('block-15'), x: 200, y: 600, id: 'block-15' }, { block: document.getElementById('block-16'), x: 300, y: 600, id: 'block-16' }, { block: document.getElementById('block-17'), x: 400, y: 600, id: 'block-17' }, { block: document.getElementById('cut-food'), x: 500, y: 600, id: 'cut-food' }, { block: document.getElementById('block-18'), x: 600, y: 600, id: 'block-18' }, { block: document.getElementById('block-19'), x: 700, y: 600, id: 'block-19' }, { block: document.getElementById('block-20'), x: 800, y: 600, id: 'block-20' }];
+    const Player = document.getElementById('player');
+    const playerHand = document.getElementById('player-hand');
+    const playerR = 50;
+
+    const EarnMoneyDisplay = document.getElementById('coin-display');
+
+    const CutClock = document.getElementById('progress');
+    const progressBar = document.getElementById('progress-bar');
+    const WashClock = document.getElementById('Progress');
+    const ProgressBar = document.getElementById('Progress-bar');
+    const ConstSpeed = 3;
+    let speed = 3;
+    let posX = 450;
+    let posY = 300;
+    let ActiveBlockPos = -1;
+    let EarnMoney = 0;
+    let SuccessOrderNum = 0;
+    let FailOrderNum = 0;
+
+    window.addEventListener('keydown', (e) => {
+        keys[e.key] = true;
+        switch (e.key) {
+            case ' ':
+                if(speed == 0)break;
+                if (!PutDown()) PickUp();
+                break;
+            case 'x':
+                if (!Cut()) Wash();
+                break;
+        }
+    });
+
+    window.addEventListener('keyup', (e) => {
+        keys[e.key] = false;
+    });
+
+    function EndGame(){
+        window.location.href = "game.html";
+        speed = ConstSpeed;
+    }
+
+    function CheckDistance(_x, _y, _x_, _y_) {
+        return (_x - _x_) * (_x - _x_) + (_y - _y_) * (_y - _y_) <= 11000;
+    }
+
+    function SelectBlock() {
+        let middleX = posX + playerR;
+        let middleY = posY + playerR;
+        for (let i = 0; i < 29; ++i) {
+            let BlockSet = obstacles[i];
+            if (ActiveBlockPos == -1 && CheckDistance(posX, posY, BlockSet.x, BlockSet.y)) {
+                ActiveBlockPos = i;
+                BlockSet.block.classList.add('highlight');
+                break;
+            }
+        }
+        if (ActiveBlockPos != -1 && !CheckDistance(posX, posY, obstacles[ActiveBlockPos].x, obstacles[ActiveBlockPos].y)) {
+            obstacles[ActiveBlockPos].block.classList.remove('highlight');
+            ActiveBlockPos = -1;
+        }
+    }
+
+    function PutDown() {
+        if (playerHand.innerHTML.length == 0 || ActiveBlockPos == -1) return false;
+
+        if (ActiveBlockPos == 11 && playerHand.firstElementChild.className == 'clean-tray-box') return false;
+
+        playAudio('put_down');
+
+        let BlockSet = obstacles[ActiveBlockPos];
+
+        if (ActiveBlockPos == 17 && playerHand.firstElementChild.childElementCount > 0) {
+            let Dish = document.getElementById(playerHand.firstElementChild.id);
+            if (!CheckOrder(playerHand.firstElementChild)) return false;
+            Dish.innerHTML = "";
+            obstacles[18].block.innerHTML += "<div class=\"clean-tray-box dirty\" id=\"clean-tray-" + Dish.id[11] + "\"></div>";
+            playerHand.innerHTML = "";
+        }
+
+        if (ActiveBlockPos == 17) return false;
+
+        if (BlockSet.block.firstElementChild == null) {
+            BlockSet.block.innerHTML = playerHand.innerHTML;
+            playerHand.innerHTML = "";
+            return true;
+        }
+
+        if (BlockSet.block.firstElementChild.className == 'clean-tray-box' && playerHand.firstElementChild.className == 'smashed') {
+            let Tray = document.getElementById(BlockSet.block.firstChild.id);
+            if (Tray.childElementCount == 0 || (Tray.childElementCount < 2 && Tray.firstChild.id != playerHand.firstChild.id)) {
+                Tray.innerHTML += playerHand.innerHTML;
+                playerHand.innerHTML = "";
+                return true;
+            }
+            return false;
+        }
+
+        return true;
+    }
+
+    function PickUp() {
+        if (playerHand.innerHTML.length > 0 || ActiveBlockPos == -1) return false;
+        let BlockSet = obstacles[ActiveBlockPos];
+        if (BlockSet.block.innerHTML.length > 0) {
+            playerHand.innerHTML = BlockSet.block.innerHTML;
+            BlockSet.block.innerHTML = "";
+            return true;
+        }
+        switch (BlockSet.id) {
+            case 'cabbage-box':
+                playerHand.innerHTML = "<div id=\"cabbage\" style=\"\"></div>";
+                return;
+            case 'tomato-box':
+                playerHand.innerHTML = "<div id=\"tomato\" style=\"\"></div>";
+                return;
+        }
+    }
+
+    function Cut() {
+        let CutBlock = obstacles[25];
+        if (ActiveBlockPos != 25 || CutBlock.block.innerHTML.length == 0) return false;
+        let ObjectOnCutBlock = CutBlock.block.firstChild;
+        if ((ObjectOnCutBlock.id != 'cabbage' && ObjectOnCutBlock.id != 'tomato') || ObjectOnCutBlock.className == 'smashed') return false;
+        playAudio('cut_food');
+        let progress = 0;
+        speed = 0;
+        CutClock.style.display = 'block';
+        const interval = setInterval(() => {
+            progress += 10;
+            if (progress >= 100) {
+                stopAudio('cut_food');
+                progress = 100;
+                ObjectOnCutBlock.classList.add('smashed');
+                speed = ConstSpeed;
+                CutClock.style.display = 'none';
+                progressBar.style.width = '0%';
+                clearInterval(interval);
+                return;
+            }
+            progressBar.style.width = progress + '%';
+        }, 300);
+    }
+
+    function Wash() {
+        let WashBlock = obstacles[11].block;
+        let StoreTrayBlock = obstacles[12].block;
+        if (ActiveBlockPos != 11 || WashBlock.innerHTML.length == 0 || WashBlock.firstChild.className != 'clean-tray-box dirty') return false;
+        playAudio('wash_tray');
+        let progress = 0;
+        let DirtyTray = [WashBlock.firstChild, null];
+        let DirtyTrayNum = 1
+        if (WashBlock.firstChild != WashBlock.lastChild) {
+            DirtyTray[1] = WashBlock.lastChild;
+            DirtyTrayNum++;
+        }
+        speed = 0;
+        WashClock.style.display = 'block';
+        const interval = setInterval(() => {
+            progress += 10 / DirtyTrayNum;
+            if (progress >= 100) {
+                stopAudio('wash_tray');
+                progress = 100;
+                speed = ConstSpeed;
+                WashClock.style.display = 'none';
+                WashBlock.innerHTML = "";
+                StoreTrayBlock.innerHTML += "<div class=\"clean-tray-box\" id=\"clean-tray-" + DirtyTray[0].id[11] + "\"></div>";
+                if (DirtyTray[1] != null) WashBlock.innerHTML += "<div class=\"clean-tray-box\" id=\"clean-tray-" + DirtyTray[1].id[11] + "\"></div>";
+                ProgressBar.style.height = '0%';
+                clearInterval(interval);
+                return;
+            }
+            ProgressBar.style.height = progress + '%';
+        }, 400);
+    }
+
+    let ActiveOrderBox = ["", "", ""];
+    let Order = [document.getElementById('order-0'), document.getElementById('order-1'), document.getElementById('order-2')];
+    let StopOrderClockName = [null, null, null];
+    let OrderProgress = [0, 0, 0];
+    let OrderProgressBar = [document.getElementById('progress-bar-0'), document.getElementById('progress-bar-1'), document.getElementById('progress-bar-2')];
+    const OrderBox = [document.getElementById('order-0'), document.getElementById('order-1'), document.getElementById('order-2')]
+    const AllMeals = ['cabb_', 'toma_', 'cabb_toma_'];
+
+    function GenerateOrders() {
+        for (let i = 0; i < 3; ++i) {
+            if (ActiveOrderBox[i].length == 0) {
+                ActiveOrderBox[i] = AllMeals[Math.floor(Math.random() * 100) % 3];
+                OrderBox[i].innerHTML = "<div class=\"meal-box\" id=\"" + ActiveOrderBox[i] + "\" style=\"width: 80px;height: 80px;background-image: url(../assets/elements_img/" + ActiveOrderBox[i] + ".png);background-repeat: no-repeat;background-size: 100%;background-position: center;\"></div><div class=\"progress-box\" id=\"progress-" + i + "\"><div class=\"progress-bar-box\" id=\"progress-bar-" + i + "\"></div></div>";
+                OrderBox[i].style.display = 'block';
+                OrderProgress[i] = 0;
+                OrderProgressBar[i] = document.getElementById('progress-bar-' + i);
+                StopOrderClockName[i] = setInterval(() => {StartCountDownOrder(i, Order[i])}, 1500);
+                break;
+            }
+        }
+    }
+
+    function StartCountDownOrder(i, OrderItem){
+        if(i > 2)return;
+        OrderProgress[i] += 5;
+        if(OrderProgress[i]>=75){
+            OrderProgressBar[i].style.backgroundColor = 'red';
+        }
+        if (OrderProgress[i] >= 100) {
+            playAudio('order_fail');
+            volumeDown('order_fail',0.2);
+            OrderProgress[i] = 0;
+            Order[i].innerHTML = "";
+            Order[i].classList.add('fail');
+            setTimeout(function(){
+                Order[i].style.display = 'none';
+                Order[i].classList.remove('fail');
+                ActiveOrderBox[i] = "";
+                OrderProgressBar[i].style.height = '0%';
+            },1500);
+            clearInterval(StopOrderClockName[i]);
+            FailOrderNum ++;
+            return;
+        }
+        OrderProgressBar[i].style.height = OrderProgress[i] + '%';
+    }
+
+    setTimeout(function(){playAudio('minigame_bgm');},500);
+    volumeDown('minigame_bgm', 0.1);
+    let miniGameBgm =  setInterval(function () { playAudio('minigame_bgm'); }, 16000);
+
+    let StopGenerateOrders = setInterval(function () { GenerateOrders(); }, 5000);
+
+    let StartGame = false;
+    let timeLeft = 180;
+    const warningtime = 15;
+    const countdownElement = document.getElementById('game-clock-time');
+    let timer = null;
+    function StartCountDown() {
+        timeLeft--;
+        if (timeLeft < 0) {
+            playAudio('end_game');
+            clearInterval(timer);
+            volumeDown('end_game',0.2);
+            stopAudio('minigame_bgm');
+            clearInterval(miniGameBgm);
+            countdownElement.textContent = "00:00";
+            clearInterval(StopGenerateOrders);
+            document.getElementById('end-game-box').style.display = 'block';
+            document.getElementById('success-order').innerHTML = "Order Finished: " + SuccessOrderNum;
+            document.getElementById('fail-order').innerHTML = "Order Missed: " + FailOrderNum;
+            let countUp = 0;
+            let StopCountUp = setInterval(function () {
+                if (countUp <= EarnMoney) {
+                    document.getElementById('earn-money-final').innerHTML = countUp;
+                    countUp++;
+                }
+                else clearInterval(StopCountUp);
+            }, 10);
+            document.getElementById('earn-money-final').innerHTML = EarnMoney;
+            CoinManager.addCoin(EarnMoney);
+            document.getElementById('coin-display').innerHTML = CoinManager.getCoin();
+            for (let i = 0; i < 3; ++i) {
+                clearInterval(StopOrderClockName[i]);
+                OrderBox[i].classList.display = 'none';
+            }
+            if(AchievementManager.getAc()[0] == 0 && EarnMoney >= 123)AchievementManager.newAc(0);
+            if(AchievementManager.getAc()[1] == 0 && FailOrderNum == 0)AchievementManager.newAc(1);
+            if(AchievementManager.getAc()[2] == 0 && SuccessOrderNum == 0)AchievementManager.newAc(2);
+            return;
+        }
+        const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        const seconds = (timeLeft % 60).toString().padStart(2, '0');
+        countdownElement.textContent = `${minutes}:${seconds}`;
+        if (timeLeft <= warningtime) {
+            countdownElement.classList.add('warning');
+        } else {
+            countdownElement.classList.remove('warning');
+        }
+    }
+
+    function CheckOrder(Dish) {
+        let MealBox = "";
+        let MoneyToEarn = 0;
+        if (Dish.firstChild.id == 'cabbage' || Dish.lastChild.id == 'cabbage') MealBox += "cabb_", MoneyToEarn += 7 + Math.floor(Math.random() * 100) % 3;
+        if (Dish.firstChild.id == 'tomato' || Dish.lastChild.id == 'tomato') MealBox += "toma_", MoneyToEarn += 7 + Math.floor(Math.random() * 100) % 3;
+        for (let i = 0; i < 3; ++i) {
+            if (MealBox == ActiveOrderBox[i]) {
+                playAudio('order_success');
+                volumeDown('order_success',0.2);
+                EarnMoney += MoneyToEarn * (DoubleMoney + 1);
+                ActiveOrderBox[i] = "";
+                Order[i].innerHTML = "";
+                Order[i].classList.add('finished');
+                setTimeout(() => {
+                    Order[i].classList.remove('finished');
+                    Order[i].style.display = 'none';
+                    ActiveOrderBox[i] = "";
+                    OrderProgressBar[i].style.height = '0%';
+                    clearInterval(StopOrderClockName[i]);
+                    StopOrderClockName[i] = null;
+                    Order[i].style.display = 'none';
+                }, 1500);
+                SuccessOrderNum ++;
+                EarnMoneyDisplay.innerHTML = "Earn " + EarnMoney;
+                if(!StartGame){//复刻《胡闹厨房》预制菜环节
+                    StartGame = true;
+                    timer = setInterval(StartCountDown, 1000);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function GameLoop() {
+        if ((keys['w'] || keys['a'] || keys['s'] || keys['d']) && speed) {
+            playAudio("walking");
+        }
+        if (keys['w'] && keys['a']) {
+            posY -= speed;
+            posX -= speed;
+        } else if (keys['w'] && keys['d']) {
+            posY -= speed;
+            posX += speed;
+        } else if (keys['s'] && keys['a']) {
+            posY += speed;
+            posX -= speed;
+        } else if (keys['s'] && keys['d']) {
+            posY += speed;
+            posX += speed;
+        } else if (keys['w']) {
+            posY -= speed;
+        } else if (keys['a']) {
+            posX -= speed;
+        } else if (keys['s']) {
+            posY += speed;
+        } else if (keys['d']) {
+            posX += speed;
+        }
+        posX = Math.max(100, Math.min(800, posX));
+        posY = Math.max(100, Math.min(500, posY));
+        SelectBlock();
+        //console.log(posX,posY);
+        //console.log(ActiveBlockPos);
+        Player.style.left = posX + 'px';
+        Player.style.top = posY + 'px';
+        requestAnimationFrame(GameLoop);
+    }
+
+    GameLoop();
+</script>
